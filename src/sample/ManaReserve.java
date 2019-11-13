@@ -57,7 +57,7 @@ public class ManaReserve {
 
     public boolean hasEnoughMana(int amount) {
         int current = getCurrentMana();
-        if(this.currentMana>=amount)
+        if(current>=amount)
         {
             return true;
         }
