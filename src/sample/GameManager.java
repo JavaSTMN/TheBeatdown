@@ -62,6 +62,7 @@ public class GameManager {
 
     public void initPlayersHeroes() {
         // TODO
+        // Init  MaxMana à 0 et MaxManaSlots à 8
     }
 
     public void initPlayersDecks() {
@@ -77,6 +78,8 @@ public class GameManager {
     }
 
     public void setTurn(Player p) {
-        // TODO
+        ManaReserve mana = p.getManaReserve();
+        mana.addManaMax(1);
+        mana.refillMana(mana.getMaxMana());
     }
 }

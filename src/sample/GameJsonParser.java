@@ -28,11 +28,11 @@ public class GameJsonParser {
         this.cardsFilePath = cardsFilePath;
     }
 
-    public ArrayList<Player> generateHeroesFromJson() {
-        // TODO
+    public ArrayList<Player> generateHeroesFromJson(){
+        return new ArrayList<>();
     }
 
     public ArrayList<Card> generateCardsFromJson() {
-        // TODO
+        return new ArrayList<>();
     }
 }
