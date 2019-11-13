@@ -46,6 +46,7 @@ public class ManaReserve {
 
     public boolean hasEnoughMana(int amount) {
         // TODO
+        return true;
     }
 
     public void decreaseMana(int amount) {

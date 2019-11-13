@@ -30,9 +30,11 @@ public class GameJsonParser {
 
     public ArrayList<Player> generateHeroesFromJson() {
         // TODO
+        return new ArrayList<Player>();
     }
 
     public ArrayList<Card> generateCardsFromJson() {
         // TODO
+        return new ArrayList<Card>();
     }
 }
