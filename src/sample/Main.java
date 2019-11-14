@@ -18,5 +18,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+        GameJsonParser gj = new GameJsonParser("game.json");
+        gj.generateHeroesFromJson();
     }
 }

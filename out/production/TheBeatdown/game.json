@@ -1,0 +1,118 @@
+﻿{
+    "heroes": [
+        {
+            "id": "HERO1",
+            "health": 30,
+            "initialMana": 3,
+            "initialHandSize": 3,
+            "name": "Death Row Records",
+            "portrait": "death_row_record.jpg",
+            "hero_spell": {
+                "name": "Real Muthaphuckkin G's",
+                "description": "Picks 1 card from the deck.",
+                "cost": 2,
+                "action": "DRAW_CARDS",
+                "actionParam": 1
+            }
+        },
+        {
+            "id": "HERO2",
+            "health": 30,
+            "initialMana": 3,
+            "initialHandSize": 3,
+            "name": "Bad Boy Records",
+            "portrait": "bad_boys_records.jpg",
+            "hero_spell": {
+                "name": "East Coast Flow",
+                "description": "Heals 2 HP of the target.",
+                "cost": 2,
+                "action": "HEAL",
+                "actionParam": 2
+            }
+        }
+    ],
+    "minions": [
+        {
+            "id": "MI1",
+            "name": "Cardi B",
+            "portrait": "cardi_b.jpg",
+            "cost": 1,
+            "attack": 1,
+            "health": 1
+        },
+        {
+            "id": "MI2",
+            "name": "Young Thug",
+            "portrait": "young_thug.jpg",
+            "cost": 2,
+            "attack": 3,
+            "health": 2
+        },
+        {
+            "id": "MI3",
+            "name": "Pusha T",
+            "portrait": "pusha_t.jpg",
+            "cost": 3,
+            "attack": 3,
+            "health": 3
+        },
+        {
+            "id": "MI4",
+            "name": "Dr. Dre",
+            "portrait": "dr_dre.jpg",
+            "cost": 3,
+            "attack": 2,
+            "health": 2
+        },
+        {
+            "id": "MI5",
+            "name": "Dreezy Drake",
+            "portrait": "dreezy.jpg",
+            "cost": 5,
+            "attack": 6,
+            "health": 3
+        },
+        {
+            "id": "MI6",
+            "name": "2Pac",
+            "portrait": "2pac.jpg",
+            "cost": 8,
+            "attack": 7,
+            "health": 6
+        }
+    ],
+    "spells": [
+        {
+            "id": "SP1",
+            "name": "Punchlines",
+            "description": "Deals 3 damage randomly split among all enemies.",
+            "cost": 1,
+            "action": "RANDOM_SPLITTED_DMG",
+            "actionParam": 3
+        },
+        {
+            "id": "SP2",
+            "name": "Featuring",
+            "description": "Draw 2 cards.",
+            "cost": 3,
+            "action": "DRAW_CARDS",
+            "actionParam": 2
+        },
+        {
+            "id": "SP3",
+            "name": "New album",
+            "description": "Add a mana slot.",
+            "cost": 4,
+            "action": "ADD_MANA_SLOT",
+            "actionParam": 1
+        },
+        {
+            "id": "SP4",
+            "name": "Certified artist",
+            "description": "Heal 2 HP of the target.",
+            "cost": 3,
+            "action": "HEAL",
+            "actionParam": 5
+        }
+    ]
+}
