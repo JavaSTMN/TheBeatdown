@@ -8,6 +8,9 @@ public class Hand {
     private int maxHandSize;
     private ArrayList<Card> cards;
 
+    public Hand() {
+    }
+
     public Hand(int initialHandSize, int maxHandSize, ArrayList<Card> cards) {
         this.initialHandSize = initialHandSize;
         this.maxHandSize = maxHandSize;

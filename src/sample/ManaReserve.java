@@ -4,12 +4,11 @@ public class ManaReserve {
 
     private int currentMana;
     private int maxMana;
-    private int maxManaSlots;
+    private int maxManaSlots = 8;
 
-    public ManaReserve(int currentMana, int maxMana, int maxManaSlots) {
+    public ManaReserve(int currentMana, int maxMana) {
         this.currentMana = currentMana;
         this.maxMana = maxMana;
-        this.maxManaSlots = maxManaSlots;
     }
 
     public int getCurrentMana() {

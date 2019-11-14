@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
 
     @Override
@@ -18,7 +20,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         GameJsonParser gj = new GameJsonParser("game.json");
-        gj.generateHeroesFromJson();
+        ArrayList<Player> players = gj.generateHeroesFromJson();
 
         launch(args);
     }
