@@ -19,8 +19,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        GameJsonParser gj = new GameJsonParser("game.json");
-        ArrayList<Player> players = gj.generateHeroesFromJson();
+        ArrayList<Player> players = new GameJsonParser<Player>().generateListFromJson();
 
         launch(args);
     }

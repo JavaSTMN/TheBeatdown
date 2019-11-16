@@ -13,34 +13,38 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class GameJsonParser {
-
-    private String gameJsonFilePath;
+public class GameJsonParser<T> {
     private File jsonFile;
 
-    public GameJsonParser(String gameJsonFilePath) {
-        this.gameJsonFilePath = gameJsonFilePath;
+    public GameJsonParser() {
         jsonFile = getFileFromResources("game.json");
     }
 
-    public ArrayList<Player> generateHeroesFromJson() {
+    public ArrayList<T> generateListFromJson() {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
-
         try (FileReader reader = new FileReader(jsonFile))
         {
             // Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONObject jo = (JSONObject) obj;
 
-            // Get heroes and iterate on them
-            JSONArray heroesList = (JSONArray) jo.get("heroes");
+            ArrayList<T> list = new ArrayList<T>();
 
-            // Create the arraylist
-            ArrayList<Player> list = new ArrayList<Player>();
-            heroesList.forEach(hero -> parseHeroObject((JSONObject) hero, list));
+            // Get entries from json file and iterate on them
+            if (true) {
+                JSONArray jsonList = (JSONArray) jo.get("heroes");
+                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
+            } else if (false) {
+                JSONArray jsonList = (JSONArray) jo.get("minions");
+                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
+            } else {
+                JSONArray jsonList = (JSONArray) jo.get("spells");
+                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
+            }
 
             return list;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -51,7 +55,7 @@ public class GameJsonParser {
         return null;
     }
 
-    private void parseHeroObject(JSONObject hero, ArrayList<Player> list) {
+    private void parseHeroObject(JSONObject hero, ArrayList<T> list) {
         // Create a Player instance the hero
         Player p = new Player();
 
@@ -76,17 +80,7 @@ public class GameJsonParser {
         // TODO: Set hero spell
 
         // Add it to the list
-        list.add(p);
-    }
-
-    public ArrayList<Card> generateMinionsFromJson() {
-        // TODO
-        return new ArrayList<Card>();
-    }
-
-    public ArrayList<Card> generateSpellsFromJson() {
-        // TODO
-        return new ArrayList<Card>();
+        list.add((T) p);
     }
 
     /**
