@@ -10,6 +10,7 @@
             "hero_spell": {
                 "name": "Real Muthaphuckkin G's",
                 "description": "Picks 1 card from the deck.",
+                "portrait": "real_gs.jpg",
                 "cost": 2,
                 "action": "DRAW_CARDS",
                 "actionParam": 1
@@ -25,6 +26,7 @@
             "hero_spell": {
                 "name": "East Coast Flow",
                 "description": "Heals 2 HP of the target.",
+                "portrait": "east_coast_flow.jpg",
                 "cost": 2,
                 "action": "HEAL",
                 "actionParam": 2
@@ -86,6 +88,7 @@
             "id": "SP1",
             "name": "Punchlines",
             "description": "Deals 3 damage randomly split among all enemies.",
+            "portrait": "punchlines.jpg",
             "cost": 1,
             "action": "RANDOM_SPLITTED_DMG",
             "actionParam": 3
@@ -94,6 +97,7 @@
             "id": "SP2",
             "name": "Featuring",
             "description": "Draw 2 cards.",
+            "portrait": "featuring.jpg",
             "cost": 3,
             "action": "DRAW_CARDS",
             "actionParam": 2
@@ -102,6 +106,7 @@
             "id": "SP3",
             "name": "New album",
             "description": "Add a mana slot.",
+            "portrait": "album.jpg",
             "cost": 4,
             "action": "ADD_MANA_SLOT",
             "actionParam": 1
@@ -110,6 +115,7 @@
             "id": "SP4",
             "name": "Certified artist",
             "description": "Heal 2 HP of the target.",
+            "portrait": "certif.jpg",
             "cost": 3,
             "action": "HEAL",
             "actionParam": 5

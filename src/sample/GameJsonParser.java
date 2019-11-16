@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
 public class GameJsonParser<T> {
     private File jsonFile;
     final Class<T> typeParameterClass;
@@ -36,13 +37,29 @@ public class GameJsonParser<T> {
             // Get entries from json file and iterate on them
             if (typeParameterClass.equals(Player.class)) {
                 JSONArray jsonList = (JSONArray) jo.get("heroes");
-                jsonList.forEach(h -> parseHeroObject((JSONObject) h, list));
+                jsonList.forEach(h -> {
+                    try {
+                        parseHeroObject((JSONObject) h, list);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             } else if (typeParameterClass.equals(Minion.class)) {
                 JSONArray jsonList = (JSONArray) jo.get("minions");
-                jsonList.forEach(m -> parseMinionObject((JSONObject) m, list));
+                try {
+                    jsonList.forEach(m -> parseMinionObject((JSONObject) m, list));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else {
                 JSONArray jsonList = (JSONArray) jo.get("spells");
-                jsonList.forEach(s -> parseHeroObject((JSONObject) s, list));
+                jsonList.forEach(s -> {
+                    try {
+                        parseSpellObject((JSONObject) s, list);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
 
             return list;
@@ -56,8 +73,8 @@ public class GameJsonParser<T> {
         return null;
     }
 
-    private void parseHeroObject(JSONObject hero, ArrayList<T> list) {
-        // Create a Player instance the hero
+    private void parseHeroObject(JSONObject hero, ArrayList<T> list) throws Exception {
+        // Create an instance of the player
         Player p = new Player();
 
         // Set name
@@ -78,14 +95,15 @@ public class GameJsonParser<T> {
         p.setHand(new Hand());
         p.getHand().setInitialHandSize(Integer.parseInt(hero.get("initialHandSize").toString()));
 
-        // TODO: Set hero spell
+        // Set hero spell
+        p.setHeroSpell(getSpecificSpellFromJson((JSONObject)hero.get("hero_spell")));
 
         // Add it to the list
         list.add((T) p);
     }
 
     private void parseMinionObject(JSONObject minion, ArrayList<T> list) {
-        // Create a Player instance the minion
+        // Create an instance of the minion
         Minion m = new Minion();
 
         // Set name
@@ -106,6 +124,55 @@ public class GameJsonParser<T> {
 
         // Add it to the list
         list.add((T) m);
+    }
+
+    private void parseSpellObject(JSONObject spell, ArrayList<T> list) throws Exception {
+        // Add it to the list
+        list.add((T) getSpecificSpellFromJson(spell));
+    }
+
+    private Spell getSpecificSpellFromJson(JSONObject spell) throws Exception {
+        Spell s;
+
+        // Instanciate the right spell card
+        Spell.SpellType st = Spell.SpellType.valueOf(spell.get("action").toString());
+        switch (st) {
+            case RANDOM_SPLITTED_DMG:
+                s = new SpellArcanaMissile();
+                break;
+
+            case DRAW_CARDS:
+                s = new SpellPickCard();
+                break;
+
+            case ADD_MANA_SLOT:
+                s = new SpellAddManaMax();
+                break;
+
+            case HEAL:
+                s = new SpellHeal();
+                break;
+
+            default:
+                throw new Exception("Impossible to find a spell corresponding to JSON Action " + spell.get("action").toString());
+        }
+
+        // Set name
+        s.setName(spell.get("name").toString());
+
+        // Set description
+        s.setDescription(spell.get("description").toString());
+
+        // Set cost
+        s.setCost(Integer.parseInt(spell.get("cost").toString()));
+
+        // Set portrait
+        s.setImage(spell.get("portrait").toString());
+
+        // Set action param
+        s.setActionParam(Integer.parseInt(spell.get("actionParam").toString()));
+
+        return s;
     }
 
     /**
