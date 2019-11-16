@@ -15,9 +15,11 @@ import org.json.simple.parser.ParseException;
 
 public class GameJsonParser<T> {
     private File jsonFile;
+    final Class<T> typeParameterClass;
 
-    public GameJsonParser() {
+    public GameJsonParser(Class<T> typeParameterClass) {
         jsonFile = getFileFromResources("game.json");
+        this.typeParameterClass = typeParameterClass;
     }
 
     public ArrayList<T> generateListFromJson() {
@@ -32,19 +34,18 @@ public class GameJsonParser<T> {
             ArrayList<T> list = new ArrayList<T>();
 
             // Get entries from json file and iterate on them
-            if (true) {
+            if (typeParameterClass.equals(Player.class)) {
                 JSONArray jsonList = (JSONArray) jo.get("heroes");
-                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
-            } else if (false) {
+                jsonList.forEach(h -> parseHeroObject((JSONObject) h, list));
+            } else if (typeParameterClass.equals(Minion.class)) {
                 JSONArray jsonList = (JSONArray) jo.get("minions");
-                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
+                jsonList.forEach(m -> parseMinionObject((JSONObject) m, list));
             } else {
                 JSONArray jsonList = (JSONArray) jo.get("spells");
-                jsonList.forEach(v -> parseHeroObject((JSONObject) v, list));
+                jsonList.forEach(s -> parseHeroObject((JSONObject) s, list));
             }
 
             return list;
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -81,6 +82,30 @@ public class GameJsonParser<T> {
 
         // Add it to the list
         list.add((T) p);
+    }
+
+    private void parseMinionObject(JSONObject minion, ArrayList<T> list) {
+        // Create a Player instance the minion
+        Minion m = new Minion();
+
+        // Set name
+        m.setName(minion.get("name").toString());
+
+        // Set HP
+        int initialHp = Integer.parseInt(minion.get("health").toString());
+        m.setHpReserve(new HPReserve(initialHp, initialHp));
+
+        // Set cost
+        m.setCost(Integer.parseInt(minion.get("cost").toString()));
+
+        // Set portrait
+        m.setImage(minion.get("portrait").toString());
+
+        // Set dmg
+        m.setDmg(Integer.parseInt(minion.get("attack").toString()));
+
+        // Add it to the list
+        list.add((T) m);
     }
 
     /**
