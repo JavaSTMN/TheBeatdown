@@ -12,6 +12,7 @@ public class GameManager {
     private Player player2;
     private float maxTurnDuration = 60;
     private int maxDeckSize = 20;
+    private int maxHandSize = 8;
 
     public GameManager() throws Exception {
         if (this.instance == null) {
@@ -56,10 +57,11 @@ public class GameManager {
         try {
             initPlayersHeroes();
             initPlayersDecks();
+            initPlayersHands();
+            initPlayersBoards();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // TODO
     }
 
     /**
@@ -104,12 +106,29 @@ public class GameManager {
         }
 
         // assign players decks (will be shuffled in the deck class constructor)
-        this.player1.setDeck(new Deck(new ArrayDeque<>(cards)));
-        this.player2.setDeck(new Deck(new ArrayDeque<>(cards)));
+        this.player1.setDeck(new Deck(this.maxDeckSize, new ArrayDeque<>(cards)));
+        this.player2.setDeck(new Deck(this.maxDeckSize, new ArrayDeque<>(cards)));
     }
 
+    /**
+     * Sets max hand size and draws x cards to make up the initial hand for both players
+     */
     public void initPlayersHands() {
-        // TODO
+        // player1
+        this.player1.getHand().setMaxHandSize(this.maxHandSize);
+        this.player1.getHand().setCards(this.player1.getDeck().pickCardsFromDeck(this.player1.getHand().getInitialHandSize()));
+
+        // player2
+        this.player2.getHand().setMaxHandSize(this.maxHandSize);
+        this.player2.getHand().setCards(this.player2.getDeck().pickCardsFromDeck(this.player1.getHand().getInitialHandSize()));
+    }
+
+    /**
+     * Inits empty boards
+     */
+    public void initPlayersBoards() {
+        this.player1.setBoard(new ArrayList<Minion>());
+        this.player2.setBoard(new ArrayList<Minion>());
     }
 
     public void endTurn(Player p) {

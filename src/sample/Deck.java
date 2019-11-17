@@ -4,9 +4,11 @@ import java.util.*;
 
 public class Deck {
 
+    private int maxDeckSize;
     private ArrayDeque<Card> cards;
 
-    public Deck(ArrayDeque<Card> cards) {
+    public Deck(int maxDeckSize, ArrayDeque<Card> cards) {
+        this.maxDeckSize = maxDeckSize;
         this.cards = cards;
         shuffle();
     }
@@ -36,8 +38,26 @@ public class Deck {
         }
     }
 
-    public ArrayDeque<Card> pickCardsFromDeck(int amount) {
-        // TODO
-        return new ArrayDeque<Card>();
+    /**
+     * Pops amount of cards from deck and returns them
+     * @param amount
+     * @return
+     */
+    public ArrayList<Card> pickCardsFromDeck(int amount) {
+        ArrayList<Card> pickedCards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            pickedCards.add(this.cards.pop());
+        }
+
+        return pickedCards;
+    }
+
+    public int getMaxDeckSize() {
+        return maxDeckSize;
+    }
+
+    public void setMaxDeckSize(int maxDeckSize) {
+        this.maxDeckSize = maxDeckSize;
     }
 }
