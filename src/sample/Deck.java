@@ -1,29 +1,43 @@
 package sample;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Deck {
 
-    private ArrayList<Card> cards;
+    private ArrayDeque<Card> cards;
 
-    public Deck(ArrayList<Card> cards) {
+    public Deck(ArrayDeque<Card> cards) {
         this.cards = cards;
+        shuffle();
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayDeque<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
+    public void setCards(ArrayDeque<Card> cards) {
         this.cards = cards;
     }
 
     public void shuffle() {
-        // TODO
+        // get arraydeque as arraylist
+        ArrayList<Card> shuffledCards = new ArrayList<>();
+        int cardsInDeque = this.cards.size();
+        for(int i = 0; i < cardsInDeque; i++) {
+            shuffledCards.add(this.cards.pop());
+        }
+
+        // shuffle list
+        Collections.shuffle(shuffledCards);
+
+        // fill cards arraydeque
+        for(int i = 0; i < cardsInDeque; i++) {
+            this.cards.push(shuffledCards.get(i));
+        }
     }
 
-    public ArrayList<Card> pickCardsFromDeck(int amount) {
+    public ArrayDeque<Card> pickCardsFromDeck(int amount) {
         // TODO
-        return new ArrayList<Card>();
+        return new ArrayDeque<Card>();
     }
 }

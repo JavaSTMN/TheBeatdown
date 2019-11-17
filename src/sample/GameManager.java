@@ -1,38 +1,28 @@
 package sample;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 
 public class GameManager {
 
-    private GameManager instance;
-    private GameJsonParser jsonParser;
+    private static GameManager instance;
     private Player player1;
     private Player player2;
-    private float maxTurnDuration;
+    private float maxTurnDuration = 60;
+    private int maxDeckSize = 20;
 
-    public GameManager(GameManager instance, GameJsonParser jsonParser, Player player1, Player player2, float maxTurnDuration) {
-        this.instance = instance;
-        this.jsonParser = jsonParser;
-        this.player1 = player1;
-        this.player2 = player2;
-        this.maxTurnDuration = maxTurnDuration;
+    public GameManager() throws Exception {
+        if (this.instance == null) {
+            this.instance = this;
+        } else {
+            throw new Exception("Cannot instantiate the game manager more than once.");
+        }
     }
 
-    public GameManager getInstance() {
+    public static GameManager getInstance() {
         return instance;
-    }
-
-    public void setInstance(GameManager instance) {
-        this.instance = instance;
-    }
-
-    public GameJsonParser getJsonParser() {
-        return jsonParser;
-    }
-
-    public void setJsonParser(GameJsonParser jsonParser) {
-        this.jsonParser = jsonParser;
     }
 
     public Player getPlayer1() {
@@ -65,6 +55,7 @@ public class GameManager {
     public void initGame() {
         try {
             initPlayersHeroes();
+            initPlayersDecks();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,8 +79,33 @@ public class GameManager {
         this.player2 = players.get(1);
     }
 
+    /**
+     * Gets the cards from the json file, makes a deck of 20 cards from them and assigns one to each player
+     */
     public void initPlayersDecks() {
-        // TODO
+        // get cards from json
+        ArrayList<Minion> minions = new GameJsonParser<Minion>(Minion.class).generateListFromJson();
+        ArrayList<Spell> spells = new GameJsonParser<Spell>(Spell.class).generateListFromJson();
+
+        // create a list of all the unique cards in the game
+        ArrayList<Card> uniqueCards = new ArrayList<>();
+        uniqueCards.addAll(minions);
+        uniqueCards.addAll(spells);
+
+        // create a deck of N cards from the unique ones that have been extracted from the json file
+        ArrayDeque<Card> cards = new ArrayDeque<>();
+        for (int i = 0; i < this.maxDeckSize; i++) {
+            // add all the unique cards at least once
+            if (i < uniqueCards.size()) {
+                cards.push(uniqueCards.get(i));
+            } else { // fill the rest with random picks from the unique cards list
+                cards.push(uniqueCards.get((int)(Math.random() * uniqueCards.size())));
+            }
+        }
+
+        // assign players decks (will be shuffled in the deck class constructor)
+        this.player1.setDeck(new Deck(new ArrayDeque<>(cards)));
+        this.player2.setDeck(new Deck(new ArrayDeque<>(cards)));
     }
 
     public void initPlayersHands() {
