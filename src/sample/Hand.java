@@ -41,6 +41,14 @@ public class Hand {
         this.cards = cards;
     }
 
+    public void addCard(Card c) {
+        this.cards.add(c);
+    }
+
+    public void addCards(ArrayList<Card> cs) {
+        this.cards.addAll(cs);
+    }
+
     public void playCard(Card card) {
         // TODO
     }

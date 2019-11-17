@@ -59,6 +59,7 @@ public class GameManager {
             initPlayersDecks();
             initPlayersHands();
             initPlayersBoards();
+            setTurn(this.player1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,11 +132,42 @@ public class GameManager {
         this.player2.setBoard(new ArrayList<Minion>());
     }
 
+    /**
+     * triggers the set turn for the other player
+     * @param p
+     */
     public void endTurn(Player p) {
-        // TODO
+        if (p.equals(player1)) {
+            setTurn(player2);
+        } else if (p.equals(player2)) {
+            setTurn(player1);
+        }
     }
 
     public void setTurn(Player p) {
-        // TODO
+        // TODO: inverser l'affichage du board
+
+        // enable hero power
+        p.setHeroSpellAvailable(true);
+
+        ManaReserve mp = p.getManaReserve();
+        // add max mana cristal
+        if (mp.getMaxMana() + 1 <= mp.getMaxManaSlots()) {
+            mp.addManaMax(1);
+        }
+        // refill available mana
+        mp.refillMana(mp.getMaxMana());
+
+        // check current deck size
+        if(p.getDeck().getCards().size() > 0) {
+            // pick a card if room in hand
+            if (p.getHand().getCards().size() + 1 <= p.getHand().getMaxHandSize()) {
+                p.getHand().addCards(p.getDeck().pickCardsFromDeck(1));
+            }
+        } else {
+            // trigger hp loss
+            p.setHpLostPerTurn(p.getHpLostPerTurn() + 1);
+            p.triggerHPLossPerTurn();
+        }
     }
 }

@@ -3,7 +3,7 @@
         {
             "id": "HERO1",
             "health": 30,
-            "initialMana": 3,
+            "initialMana": 0,
             "initialHandSize": 3,
             "name": "Death Row Records",
             "portrait": "death_row_record.jpg",
@@ -19,7 +19,7 @@
         {
             "id": "HERO2",
             "health": 30,
-            "initialMana": 3,
+            "initialMana": 0,
             "initialHandSize": 3,
             "name": "Bad Boy Records",
             "portrait": "bad_boys_records.jpg",
