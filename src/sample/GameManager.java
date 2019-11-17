@@ -1,5 +1,8 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class GameManager {
 
     private GameManager instance;
@@ -56,12 +59,33 @@ public class GameManager {
         this.maxTurnDuration = maxTurnDuration;
     }
 
+    /**
+     * Inits a new game by initializing and assigning values for the players, cards, deck, hand, etc...
+     */
     public void initGame() {
+        try {
+            initPlayersHeroes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // TODO
     }
 
-    public void initPlayersHeroes() {
-        // TODO
+    /**
+     * Gets a list of heroes from the json file and assigns one randomly to both players.
+     * @throws Exception
+     */
+    public void initPlayersHeroes() throws Exception {
+        // get players from json
+        ArrayList<Player> players = new GameJsonParser<Player>(Player.class).generateListFromJson();
+        if (players.size() < 2) {
+            throw new Exception("Cannot init a game with less than 2 available heroes");
+        }
+        Collections.shuffle(players);
+
+        // assign players
+        this.player1 = players.get(0);
+        this.player2 = players.get(1);
     }
 
     public void initPlayersDecks() {
