@@ -28,14 +28,20 @@ public class Minion extends Card {
     }
 
     public void attack(Minion minion) {
-        // TODO
+        int dmgAdverse=minion.getDmg();
+        minion.hpReserve.loseHP(getDmg());
+        hpReserve.loseHP(dmgAdverse);
+        minion.die();
+        die();
     }
 
     public void attack(Player player) {
-        // TODO
+        player.getHpReserve().loseHP(getDmg());
     }
 
     public void die() {
-        // TODO
+        if(hpReserve.getCurrentHP()==0){
+            System.out.println("Le minion est mort");
+        }
     }
 }
