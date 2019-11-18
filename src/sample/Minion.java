@@ -6,7 +6,7 @@ public class Minion extends Card {
     private int currentHP;
     private int maxHP;
 
-    public Minion(String name, String description, int cost, String image, int dmg, HPReserve hpReserve) {
+    public Minion(String name, String description, int cost, String image, int dmg, int currentHP, int maxHP) {
         super(name, description, cost, image);
         this.dmg = dmg;
         this.currentHP = currentHP;
@@ -42,39 +42,32 @@ public class Minion extends Card {
     }
 
     public void recoverHP(int amount) {
-        int current=getCurrentHP();
-        int max=getMaxHP();
-        if(current+amount>=max)
-        {
+        int current = getCurrentHP();
+        int max = getMaxHP();
+        if (current + amount >= max) {
             setCurrentHP(max);
-        }
-        else
-        {
-            setCurrentHP(current+amount);
+        } else {
+            setCurrentHP(current + amount);
         }
     }
 
     public void loseHP(int amount) {
         int current = getCurrentHP();
-        if(current-amount<0)
-        {
+        if (current - amount < 0) {
             setCurrentHP(0);
-        }
-        else {
-            setCurrentHP(current-amount);
+        } else {
+            setCurrentHP(current - amount);
         }
     }
 
     public void attack(Minion minion) {
-        int dmgAdverse=minion.getDmg();
+        int dmgAdverse = minion.getDmg();
         minion.loseHP(getDmg());
         loseHP(dmgAdverse);
-        if(getCurrentHP()==0)
-        {
+        if (getCurrentHP() == 0) {
             die();
         }
-        if(minion.getCurrentHP()==0)
-        {
+        if (minion.getCurrentHP() == 0) {
             minion.die();
         }
     }
@@ -84,6 +77,6 @@ public class Minion extends Card {
     }
 
     public void die() {
-            System.out.println("Le minion est mort");
+        System.out.println("Le minion est mort");
     }
 }
