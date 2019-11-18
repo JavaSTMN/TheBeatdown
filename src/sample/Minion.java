@@ -31,8 +31,14 @@ public class Minion extends Card {
         int dmgAdverse=minion.getDmg();
         minion.hpReserve.loseHP(getDmg());
         hpReserve.loseHP(dmgAdverse);
-        minion.die();
-        die();
+        if(hpReserve.getCurrentHP()==0)
+        {
+            die();
+        }
+        if(minion.hpReserve.getCurrentHP()==0)
+        {
+            minion.die();
+        }
     }
 
     public void attack(Player player) {
