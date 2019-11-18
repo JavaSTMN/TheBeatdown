@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.HeroWidgetController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="125.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="368.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="10.0" prefWidth="125.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="302.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ImageView id="heroPortrait" fitHeight="300.0" fitWidth="360.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <Label id="heroName" text="Hero name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+      <Button id="heroSpellBtn" mnemonicParsing="false" prefHeight="135.0" prefWidth="215.0" text="HERO SPELL" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label id="heroHealth" alignment="CENTER" layoutX="236.0" layoutY="343.0" text="21" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</GridPane>
