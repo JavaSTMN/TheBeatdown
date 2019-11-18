@@ -24,5 +24,6 @@ public class Deck {
 
     public ArrayList<Card> pickCardsFromDeck(int amount) {
         // TODO
+        return  new ArrayList<>();
     }
 }

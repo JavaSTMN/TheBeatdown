@@ -22,7 +22,7 @@ public class Player {
         this.deck = deck;
         this.hand = hand;
         this.board = board;
-        HeroSpell = heroSpell;
+        this.HeroSpell = heroSpell;
         this.heroSpellAvailable = heroSpellAvailable;
         this.hpLostPerTurn = hpLostPerTurn;
         this.maxCardsOnBoard = maxCardsOnBoard;
