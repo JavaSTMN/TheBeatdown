@@ -1,35 +1,29 @@
 package sample;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+
 public class GameManager {
 
-    private GameManager instance;
-    private GameJsonParser jsonParser;
+    private static GameManager instance;
     private Player player1;
     private Player player2;
-    private float maxTurnDuration;
+    private float maxTurnDuration = 60;
+    private int maxDeckSize = 20;
+    private int maxHandSize = 8;
 
-    public GameManager(GameManager instance, GameJsonParser jsonParser, Player player1, Player player2, float maxTurnDuration) {
-        this.instance = instance;
-        this.jsonParser = jsonParser;
-        this.player1 = player1;
-        this.player2 = player2;
-        this.maxTurnDuration = maxTurnDuration;
+    public GameManager() throws Exception {
+        if (this.instance == null) {
+            this.instance = this;
+        } else {
+            throw new Exception("Cannot instantiate the game manager more than once.");
+        }
     }
 
-    public GameManager getInstance() {
+    public static GameManager getInstance() {
         return instance;
-    }
-
-    public void setInstance(GameManager instance) {
-        this.instance = instance;
-    }
-
-    public GameJsonParser getJsonParser() {
-        return jsonParser;
-    }
-
-    public void setJsonParser(GameJsonParser jsonParser) {
-        this.jsonParser = jsonParser;
     }
 
     public Player getPlayer1() {
@@ -56,30 +50,124 @@ public class GameManager {
         this.maxTurnDuration = maxTurnDuration;
     }
 
+    /**
+     * Inits a new game by initializing and assigning values for the players, cards, deck, hand, etc...
+     */
     public void initGame() {
-        // TODO
+        try {
+            initPlayersHeroes();
+            initPlayersDecks();
+            initPlayersHands();
+            initPlayersBoards();
+            setTurn(this.player1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void initPlayersHeroes() {
-        // TODO
-        // Init  MaxMana à 0 et MaxManaSlots à 8
+    /**
+     * Gets a list of heroes from the json file and assigns one randomly to both players.
+     * @throws Exception
+     */
+    public void initPlayersHeroes() throws Exception {
+        // get players from json
+        ArrayList<Player> players = new GameJsonParser<Player>(Player.class).generateListFromJson();
+        if (players.size() < 2) {
+            throw new Exception("Cannot init a game with less than 2 available heroes");
+        }
+        Collections.shuffle(players);
+
+        // assign players
+        this.player1 = players.get(0);
+        this.player2 = players.get(1);
     }
 
+    /**
+     * Gets the cards from the json file, makes a deck of 20 cards from them and assigns one to each player
+     */
     public void initPlayersDecks() {
-        // TODO
+        // get cards from json
+        ArrayList<Minion> minions = new GameJsonParser<Minion>(Minion.class).generateListFromJson();
+        ArrayList<Spell> spells = new GameJsonParser<Spell>(Spell.class).generateListFromJson();
+
+        // create a list of all the unique cards in the game
+        ArrayList<Card> uniqueCards = new ArrayList<>();
+        uniqueCards.addAll(minions);
+        uniqueCards.addAll(spells);
+
+        // create a deck of N cards from the unique ones that have been extracted from the json file
+        ArrayDeque<Card> cards = new ArrayDeque<>();
+        for (int i = 0; i < this.maxDeckSize; i++) {
+            // add all the unique cards at least once
+            if (i < uniqueCards.size()) {
+                cards.push(uniqueCards.get(i));
+            } else { // fill the rest with random picks from the unique cards list
+                cards.push(uniqueCards.get((int)(Math.random() * uniqueCards.size())));
+            }
+        }
+
+        // assign players decks (will be shuffled in the deck class constructor)
+        this.player1.setDeck(new Deck(this.maxDeckSize, new ArrayDeque<>(cards)));
+        this.player2.setDeck(new Deck(this.maxDeckSize, new ArrayDeque<>(cards)));
     }
 
+    /**
+     * Sets max hand size and draws x cards to make up the initial hand for both players
+     */
     public void initPlayersHands() {
-        // TODO
+        // player1
+        this.player1.getHand().setMaxHandSize(this.maxHandSize);
+        this.player1.getHand().setCards(this.player1.getDeck().pickCardsFromDeck(this.player1.getHand().getInitialHandSize()));
+
+        // player2
+        this.player2.getHand().setMaxHandSize(this.maxHandSize);
+        this.player2.getHand().setCards(this.player2.getDeck().pickCardsFromDeck(this.player1.getHand().getInitialHandSize()));
     }
 
+    /**
+     * Inits empty boards
+     */
+    public void initPlayersBoards() {
+        this.player1.setBoard(new ArrayList<Minion>());
+        this.player2.setBoard(new ArrayList<Minion>());
+    }
+
+    /**
+     * triggers the set turn for the other player
+     * @param p
+     */
     public void endTurn(Player p) {
-        // TODO
+        if (p.equals(player1)) {
+            setTurn(player2);
+        } else if (p.equals(player2)) {
+            setTurn(player1);
+        }
     }
 
     public void setTurn(Player p) {
-        ManaReserve mana = p.getManaReserve();
-        mana.addManaMax(1);
-        mana.refillMana(mana.getMaxMana());
+        // TODO: inverser l'affichage du board
+
+        // enable hero power
+        p.setHeroSpellAvailable(true);
+
+        ManaReserve mp = p.getManaReserve();
+        // add max mana cristal
+        if (mp.getMaxMana() + 1 <= mp.getMaxManaSlots()) {
+            mp.addManaMax(1);
+        }
+        // refill available mana
+        mp.refillMana(mp.getMaxMana());
+
+        // check current deck size
+        if(p.getDeck().getCards().size() > 0) {
+            // pick a card if room in hand
+            if (p.getHand().getCards().size() + 1 <= p.getHand().getMaxHandSize()) {
+                p.getHand().addCards(p.getDeck().pickCardsFromDeck(1));
+            }
+        } else {
+            // trigger hp loss
+            p.setHpLostPerTurn(p.getHpLostPerTurn() + 1);
+            p.triggerHPLossPerTurn();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package sample;
 
 public class HPReserve {
-
     private int currentHP;
     private int maxHP;
 

@@ -11,6 +11,10 @@ public class Minion extends Card {
         this.hpReserve = hpReserve;
     }
 
+    public Minion() {
+        super();
+    }
+
     public int getDmg() {
         return dmg;
     }

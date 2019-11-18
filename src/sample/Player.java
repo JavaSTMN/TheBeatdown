@@ -3,7 +3,7 @@ package sample;
 import java.util.ArrayList;
 
 public class Player {
-
+    private String name;
     private HPReserve hpReserve;
     private ManaReserve manaReserve;
     private String image;
@@ -11,11 +11,15 @@ public class Player {
     private Hand hand;
     private ArrayList<Minion> board;
     private Spell HeroSpell;
-    private boolean heroSpellAvailable;
-    private int hpLostPerTurn;
-    private int maxCardsOnBoard;
+    private boolean heroSpellAvailable = true;
+    private int hpLostPerTurn = 0;
+    private int maxCardsOnBoard = 8;
 
-    public Player(HPReserve hpReserve, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
+    public Player() {
+    }
+
+    public Player(String name, HPReserve hpReserve, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
+        this.name = name;
         this.hpReserve = hpReserve;
         this.manaReserve = manaReserve;
         this.image = image;
@@ -118,5 +122,13 @@ public class Player {
 
     public void useHeroSpell() {
         // TODO
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
