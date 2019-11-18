@@ -7,9 +7,10 @@ public class Minion extends Card {
     private int maxHP;
 
     public Minion(String name, String description, int cost, String image, int dmg, int currentHP, int maxHP) {
+    public Minion(String name, String description, int cost, String image, int dmg,int maxHP) {
         super(name, description, cost, image);
         this.dmg = dmg;
-        this.currentHP = currentHP;
+        this.currentHP = maxHP;
         this.maxHP = maxHP;
     }
 
@@ -53,23 +54,20 @@ public class Minion extends Card {
 
     public void loseHP(int amount) {
         int current = getCurrentHP();
-        if (current - amount < 0) {
+        if(current-amount<=0)
+        {
             setCurrentHP(0);
-        } else {
-            setCurrentHP(current - amount);
+            die();
         }
+    }
+    public void counterAttack (Minion minion){
+        minion.loseHP(getDmg());
     }
 
     public void attack(Minion minion) {
-        int dmgAdverse = minion.getDmg();
-        minion.loseHP(getDmg());
-        loseHP(dmgAdverse);
-        if (getCurrentHP() == 0) {
-            die();
-        }
-        if (minion.getCurrentHP() == 0) {
-            minion.die();
-        }
+        int dmg=getDmg();
+        minion.counterAttack(this);
+        minion.loseHP(dmg);
     }
 
     public void attack(Player player) {
