@@ -82,7 +82,8 @@ public class GameJsonParser<T> {
 
         // Set HP
         int initialHp = Integer.parseInt(hero.get("health").toString());
-        p.setHpReserve(new HPReserve(initialHp, initialHp));
+        p.setCurrentHP(initialHp);
+        p.setMaxHP(initialHp);
 
         // Set mana
         int initialMana = Integer.parseInt(hero.get("initialMana").toString());
@@ -111,7 +112,8 @@ public class GameJsonParser<T> {
 
         // Set HP
         int initialHp = Integer.parseInt(minion.get("health").toString());
-        m.setHpReserve(new HPReserve(initialHp, initialHp));
+        m.setCurrentHP(initialHp);
+        m.setMaxHP(initialHp);
 
         // Set cost
         m.setCost(Integer.parseInt(minion.get("cost").toString()));

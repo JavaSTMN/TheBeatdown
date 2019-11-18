@@ -26,10 +26,26 @@ public class HPReserve {
     }
 
     public void recoverHP(int amount) {
-        // TODO
+        int current=getCurrentHP();
+        int max=getMaxHP();
+        if(current+amount>=max)
+        {
+            setCurrentHP(max);
+        }
+        else
+        {
+            setCurrentHP(current+amount);
+        }
     }
 
     public void loseHP(int amount) {
-        // TODO
+        int current = getCurrentHP();
+        if(current-amount<0)
+        {
+            setCurrentHP(0);
+        }
+        else {
+            setCurrentHP(current-amount);
+        }
     }
 }
