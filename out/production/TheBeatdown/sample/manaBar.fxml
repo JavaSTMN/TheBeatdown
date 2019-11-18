@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane maxHeight="144.0" maxWidth="310.0" prefHeight="144.0" prefWidth="310.0" style="-fx-background-color: red ;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ManaBar">
+    <children>
+        <Circle fill="blue" layoutX="50.0" layoutY="50.0" radius="10.0" />
+    </children>
+</AnchorPane>

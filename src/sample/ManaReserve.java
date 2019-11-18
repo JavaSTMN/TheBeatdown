@@ -1,6 +1,6 @@
 package sample;
 
-public class ManaReserve {
+public class ManaReserve extends Observable {
 
     private int currentMana;
     private int maxMana;
@@ -41,6 +41,7 @@ public class ManaReserve {
         if((manaMax+amount)<slotsMax){
             setMaxMana(manaMax+amount);
         }
+        notification();
     }
 
     public void refillMana(int amount) {
