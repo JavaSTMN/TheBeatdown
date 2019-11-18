@@ -15,6 +15,7 @@ public abstract class Spell extends Card {
 
     public Spell(String name, String description, int cost, String image, int actionParam) {
             super(name, description, cost, image);
+            this.actionParam = actionParam;
     }
 
     public int getActionParam() {

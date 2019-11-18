@@ -8,7 +8,8 @@ public class SpellAddManaMax extends Spell {
 
     public SpellAddManaMax() {}
 
-    public void use() {
-        // TODO
+    public void use(Player player) {
+        ManaReserve manaReserve = player.getManaReserve();
+        manaReserve.setMaxMana(manaReserve.getMaxMana() + 1);
     }
 }
