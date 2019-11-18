@@ -35,6 +35,11 @@ public class ManaReserve extends Observable {
         this.maxManaSlots = maxManaSlots;
     }
 
+    public void addObserver(ViewMana viewMana)
+    {
+        ObserverMana.add(viewMana);
+    }
+
     public void addManaMax(int amount) {
         int manaMax = getMaxMana();
         int slotsMax=getMaxManaSlots();
@@ -53,6 +58,7 @@ public class ManaReserve extends Observable {
         else{
             setCurrentMana(manaMax);
         }
+        notification();
     }
 
     public boolean hasEnoughMana(int amount) {
@@ -71,5 +77,6 @@ public class ManaReserve extends Observable {
             int current=getCurrentMana();
             setCurrentMana(current-amount);
         }
+        notification();
     }
 }

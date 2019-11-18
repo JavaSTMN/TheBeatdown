@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 public class Observable {
 
-    private ArrayList<Observer> manaReserves;
+    public ArrayList<ViewMana> ObserverMana;
 
     public void notification(){
-
+        for (ViewMana view : ObserverMana){
+            view.update(view.getManaReserve());
+        }
+        System.out.println("Observer notifier");
     }
+
+
 }
