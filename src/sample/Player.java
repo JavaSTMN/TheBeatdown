@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private HPReserve hpReserve;
+    private int currentHP;
+    private int maxHP;
     private ManaReserve manaReserve;
     private String image;
     private Deck deck;
@@ -15,8 +16,9 @@ public class Player {
     private int hpLostPerTurn;
     private int maxCardsOnBoard;
 
-    public Player(HPReserve hpReserve, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
-        this.hpReserve = hpReserve;
+    public Player(int currentHP,int maxHP, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
+        this.currentHP = currentHP;
+        this.maxHP = maxHP;
         this.manaReserve = manaReserve;
         this.image = image;
         this.deck = deck;
@@ -28,12 +30,20 @@ public class Player {
         this.maxCardsOnBoard = maxCardsOnBoard;
     }
 
-    public HPReserve getHpReserve() {
-        return hpReserve;
+    public int getCurrentHP() {
+        return currentHP;
     }
 
-    public void setHpReserve(HPReserve hpReserve) {
-        this.hpReserve = hpReserve;
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     public ManaReserve getManaReserve() {
@@ -106,6 +116,30 @@ public class Player {
 
     public void setMaxCardsOnBoard(int maxCardsOnBoard) {
         this.maxCardsOnBoard = maxCardsOnBoard;
+    }
+
+    public void recoverHP(int amount) {
+        int current=getCurrentHP();
+        int max=getMaxHP();
+        if(current+amount>=max)
+        {
+            setCurrentHP(max);
+        }
+        else
+        {
+            setCurrentHP(current+amount);
+        }
+    }
+
+    public void loseHP(int amount) {
+        int current = getCurrentHP();
+        if(current-amount<0)
+        {
+            setCurrentHP(0);
+        }
+        else {
+            setCurrentHP(current-amount);
+        }
     }
 
     public void endCurrentTurn() {

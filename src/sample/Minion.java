@@ -3,12 +3,14 @@ package sample;
 public class Minion extends Card {
 
     private int dmg;
-    private HPReserve hpReserve;
+    private int currentHP;
+    private int maxHP;
 
     public Minion(String name, String description, int cost, String image, int dmg, HPReserve hpReserve) {
         super(name, description, cost, image);
         this.dmg = dmg;
-        this.hpReserve = hpReserve;
+        this.currentHP = currentHP;
+        this.maxHP = maxHP;
     }
 
     public int getDmg() {
@@ -19,35 +21,65 @@ public class Minion extends Card {
         this.dmg = dmg;
     }
 
-    public HPReserve getHpReserve() {
-        return hpReserve;
+    public int getCurrentHP() {
+        return currentHP;
     }
 
-    public void setHpReserve(HPReserve hpReserve) {
-        this.hpReserve = hpReserve;
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public void recoverHP(int amount) {
+        int current=getCurrentHP();
+        int max=getMaxHP();
+        if(current+amount>=max)
+        {
+            setCurrentHP(max);
+        }
+        else
+        {
+            setCurrentHP(current+amount);
+        }
+    }
+
+    public void loseHP(int amount) {
+        int current = getCurrentHP();
+        if(current-amount<0)
+        {
+            setCurrentHP(0);
+        }
+        else {
+            setCurrentHP(current-amount);
+        }
     }
 
     public void attack(Minion minion) {
         int dmgAdverse=minion.getDmg();
-        minion.hpReserve.loseHP(getDmg());
-        hpReserve.loseHP(dmgAdverse);
-        if(hpReserve.getCurrentHP()==0)
+        minion.loseHP(getDmg());
+        loseHP(dmgAdverse);
+        if(getCurrentHP()==0)
         {
             die();
         }
-        if(minion.hpReserve.getCurrentHP()==0)
+        if(minion.getCurrentHP()==0)
         {
             minion.die();
         }
     }
 
     public void attack(Player player) {
-        player.getHpReserve().loseHP(getDmg());
+        player.loseHP(getDmg());
     }
 
     public void die() {
-        if(hpReserve.getCurrentHP()==0){
             System.out.println("Le minion est mort");
-        }
     }
 }
