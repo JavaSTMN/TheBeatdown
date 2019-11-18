@@ -4,12 +4,11 @@ public class ManaReserve {
 
     private int currentMana;
     private int maxMana;
-    private int maxManaSlots;
+    private int maxManaSlots = 8;
 
-    public ManaReserve(int currentMana, int maxMana, int maxManaSlots) {
+    public ManaReserve(int currentMana, int maxMana) {
         this.currentMana = currentMana;
         this.maxMana = maxMana;
-        this.maxManaSlots = maxManaSlots;
     }
 
     public int getCurrentMana() {
@@ -37,19 +36,39 @@ public class ManaReserve {
     }
 
     public void addManaMax(int amount) {
-        // TODO
+        int manaMax = getMaxMana();
+        int slotsMax=getMaxManaSlots();
+        if((manaMax+amount)<slotsMax){
+            setMaxMana(manaMax+amount);
+        }
     }
 
     public void refillMana(int amount) {
-        // TODO
+        int manaMax = getMaxMana();
+        int current = getCurrentMana();
+        if(current+amount<=manaMax){
+            setCurrentMana(current+amount);
+        }
+        else{
+            setCurrentMana(manaMax);
+        }
     }
 
     public boolean hasEnoughMana(int amount) {
-        // TODO
-        return true;
+        int current = getCurrentMana();
+        if(current>=amount)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void decreaseMana(int amount) {
-        // TODO
+        if(hasEnoughMana(amount)) {
+            int current=getCurrentMana();
+            setCurrentMana(current-amount);
+        }
     }
 }

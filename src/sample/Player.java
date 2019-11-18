@@ -3,20 +3,27 @@ package sample;
 import java.util.ArrayList;
 
 public class Player {
+	private String name;
 
-    private HPReserve hpReserve;
+    private int currentHP;
+    private int maxHP;
     private ManaReserve manaReserve;
     private String image;
     private Deck deck;
     private Hand hand;
     private ArrayList<Minion> board;
     private Spell HeroSpell;
-    private boolean heroSpellAvailable;
-    private int hpLostPerTurn;
-    private int maxCardsOnBoard;
+    private boolean heroSpellAvailable = true;
+    private int hpLostPerTurn = 0;
+    private int maxCardsOnBoard = 8;
 
-    public Player(HPReserve hpReserve, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
-        this.hpReserve = hpReserve;
+    public Player() {
+    }
+    
+    public Player(String name, int currentHP,int maxHP, ManaReserve manaReserve, String image, Deck deck, Hand hand, ArrayList<Minion> board, Spell heroSpell, boolean heroSpellAvailable, int hpLostPerTurn, int maxCardsOnBoard) {
+        this.name = name;
+        this.currentHP = currentHP;
+        this.maxHP = maxHP;
         this.manaReserve = manaReserve;
         this.image = image;
         this.deck = deck;
@@ -28,12 +35,20 @@ public class Player {
         this.maxCardsOnBoard = maxCardsOnBoard;
     }
 
-    public HPReserve getHpReserve() {
-        return hpReserve;
+    public int getCurrentHP() {
+        return currentHP;
     }
 
-    public void setHpReserve(HPReserve hpReserve) {
-        this.hpReserve = hpReserve;
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
     }
 
     public ManaReserve getManaReserve() {
@@ -108,6 +123,30 @@ public class Player {
         this.maxCardsOnBoard = maxCardsOnBoard;
     }
 
+    public void recoverHP(int amount) {
+        int current=getCurrentHP();
+        int max=getMaxHP();
+        if(current+amount>=max)
+        {
+            setCurrentHP(max);
+        }
+        else
+        {
+            setCurrentHP(current+amount);
+        }
+    }
+
+    public void loseHP(int amount) {
+        int current = getCurrentHP();
+        if(current-amount<0)
+        {
+            setCurrentHP(0);
+        }
+        else {
+            setCurrentHP(current-amount);
+        }
+    }
+
     public void endCurrentTurn() {
         // TODO
     }
@@ -118,5 +157,13 @@ public class Player {
 
     public void useHeroSpell() {
         // TODO
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

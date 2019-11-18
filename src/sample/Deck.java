@@ -1,29 +1,63 @@
 package sample;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Deck {
 
-    private ArrayList<Card> cards;
+    private int maxDeckSize;
+    private ArrayDeque<Card> cards;
 
-    public Deck(ArrayList<Card> cards) {
+    public Deck(int maxDeckSize, ArrayDeque<Card> cards) {
+        this.maxDeckSize = maxDeckSize;
         this.cards = cards;
+        shuffle();
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayDeque<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
+    public void setCards(ArrayDeque<Card> cards) {
         this.cards = cards;
     }
 
     public void shuffle() {
-        // TODO
+        // get arraydeque as arraylist
+        ArrayList<Card> shuffledCards = new ArrayList<>();
+        int cardsInDeque = this.cards.size();
+        for(int i = 0; i < cardsInDeque; i++) {
+            shuffledCards.add(this.cards.pop());
+        }
+
+        // shuffle list
+        Collections.shuffle(shuffledCards);
+
+        // fill cards arraydeque
+        for(int i = 0; i < cardsInDeque; i++) {
+            this.cards.push(shuffledCards.get(i));
+        }
     }
 
+    /**
+     * Pops amount of cards from deck and returns them
+     * @param amount
+     * @return
+     */
     public ArrayList<Card> pickCardsFromDeck(int amount) {
-        // TODO
-        return  new ArrayList<>();
+        ArrayList<Card> pickedCards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            pickedCards.add(this.cards.pop());
+        }
+
+        return pickedCards;
+    }
+
+    public int getMaxDeckSize() {
+        return maxDeckSize;
+    }
+
+    public void setMaxDeckSize(int maxDeckSize) {
+        this.maxDeckSize = maxDeckSize;
     }
 }

@@ -16,6 +16,9 @@ public class Hand {
         this.player = player;
     }
 
+    public Hand() {
+    }
+
     public int getInitialHandSize() {
         return initialHandSize;
     }
@@ -40,14 +43,17 @@ public class Hand {
         this.cards = cards;
     }
 
-    public Hand addCardToHand(Card card) {
-        this.getCards().add(card);
-        return this;
+    public void addCard(Card c) {
+        this.cards.add(c);
     }
 
-    public Hand removeCardFromHand(Card card) {
-        if (this.getCards().contains(card)) {
-            this.getCards().remove(card);
+    public void addCards(ArrayList<Card> cs) {
+        this.cards.addAll(cs);
+    }
+
+    public Hand removeCard(Card c) {
+        if (this.getCards().contains(c)) {
+            this.getCards().remove(c);
         }
         return this;
     }
@@ -72,7 +78,7 @@ public class Hand {
         ArrayList<Minion> board = this.getPlayer().getBoard();
         if (this.getCards().contains(minion)) {
             board.add(minion);
-            this.removeCardFromHand(minion);
+            this.removeCard(minion);
         }
     }
 

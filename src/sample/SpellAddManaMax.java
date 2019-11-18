@@ -6,6 +6,8 @@ public class SpellAddManaMax extends Spell {
         super(name, description, cost, image, actionParam);
     }
 
+    public SpellAddManaMax() {}
+
     public void use() {
         // TODO
     }

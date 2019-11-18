@@ -19,6 +19,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //launch(args);
+        try {
+            new GameManager();
+            GameManager.getInstance().initGame();
+
+            launch(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

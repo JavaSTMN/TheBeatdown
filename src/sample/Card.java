@@ -7,6 +7,8 @@ public abstract class Card {
     private int cost;
     private String image;
 
+    public Card() {}
+
     public Card(String name, String description, int cost, String image) {
         this.name = name;
         this.description = description;
