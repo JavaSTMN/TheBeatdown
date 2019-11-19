@@ -1,5 +1,7 @@
 package sample;
 
+
+
 public class ManaReserve extends Observable {
 
     private int currentMana;
@@ -37,7 +39,8 @@ public class ManaReserve extends Observable {
 
     public void addObserver(ViewMana viewMana)
     {
-        ObserverMana.add(viewMana);
+        System.out.println(viewMana.name);
+        this.ObserverMana.add(viewMana);
     }
 
     public void addManaMax(int amount) {
@@ -46,6 +49,7 @@ public class ManaReserve extends Observable {
         if((manaMax+amount)<slotsMax){
             setMaxMana(manaMax+amount);
         }
+        System.out.println("Print addManaMax");
         notification();
     }
 

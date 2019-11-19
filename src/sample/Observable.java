@@ -1,16 +1,17 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Observable {
 
-    public ArrayList<ViewMana> ObserverMana;
+    public List<ViewMana> ObserverMana = new ArrayList<>();
 
     public void notification(){
+        System.out.println("Observer notifier");
         for (ViewMana view : ObserverMana){
             view.update(view.getManaReserve());
         }
-        System.out.println("Observer notifier");
     }
 
 

@@ -12,24 +12,29 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
 import java.io.IOException;
 
 public class Main extends Application {
     private Stage primaryStage;
+    private ViewMana viewMana;
     private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("TheBeatDown");
-
         initRootLayout();
-        showPersonOverview();
+        ViewMana viewMana = new ViewMana();
+        viewMana.subscribe();
+        viewMana.setPrimaryStage(this.rootLayout);
+        System.out.println("Start after set");
+        viewMana.getManaReserve().addManaMax(1);
+        System.out.println("Start after addMaxMana");
+        primaryStage.setScene(viewMana.scene);
+        primaryStage.show();
     }
 
-    /**
-     * Initializes the root layout.
-     */
     public void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -47,35 +52,9 @@ public class Main extends Application {
     }
 
 
-    public void showPersonOverview() {
-        try {
-            // Load person overview.
-            GameManager.getInstance().getPlayer1().getManaReserve().setMaxMana(6);
-            int manaMax = GameManager.getInstance().getPlayer1().getManaReserve().getMaxMana();
-            for(int i=0;i<manaMax;i++) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("manaBar.fxml"));
-                AnchorPane personOverview = (AnchorPane) loader.load();
-
-                // Set person overview into the center of root layout.
-                personOverview.setTranslateX(50*i+1);
-                rootLayout.getChildren().add(personOverview);
-            }
-            GameManager.getInstance().getPlayer1().getManaReserve().setCurrentMana(3);
-            int mana = GameManager.getInstance().getPlayer1().getManaReserve().getCurrentMana();
-            for(int i=0;i<mana;i++) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("manaAvailable.fxml"));
-                AnchorPane personOverview = (AnchorPane) loader.load();
-
-                // Set person overview into the center of root layout.
-                personOverview.setTranslateX(50*i+1);
-                rootLayout.getChildren().add(personOverview);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    /**
+     * Initializes the root layout.
+     */
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -84,13 +63,10 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try {
-            //new GameManager();
-            //GameManager.getInstance().initGame();
+            new GameManager();
+            GameManager.getInstance().initGame();
 
-            ViewMana viewMana = new ViewMana();
-            viewMana.getManaReserve().setCurrentMana(4);
-
-            //launch(args);
+            launch(args);
         } catch (Exception e) {
             e.printStackTrace();
         }
