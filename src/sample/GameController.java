@@ -6,13 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -21,9 +19,9 @@ import java.util.ResourceBundle;
  * Ensuite, dans le code ici, on déclare une var privée du type du composant, avec @FXML au dessus.
  * Voir les examples ci-dessous.
  */
-public class Controller implements Initializable {
-    public static Controller instance;
-    public static Controller getInstance() {
+public class GameController implements Initializable {
+    public static GameController instance;
+    public static GameController getInstance() {
         return instance;
     }
 
@@ -67,17 +65,26 @@ public class Controller implements Initializable {
     }
 
     private void renderHand(Player p) throws IOException {
-        for (int i = 0; i < p.getHand().getCards().size() + 6; i++) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("card.fxml"));
-            Button handContainer = (Button) loader.load();
+        ArrayList<Card> cards = p.getHand().getCards();
 
-            // Set person overview into the center of root layout.
-            //personOverview.setTranslateX(50*i+1);
-            if (p == GameManager.getInstance().getPlayer1()) {
-                this.player1Hand.getChildren().add(handContainer);
-            } else {
-                this.player2Hand.getChildren().add(handContainer);
+        for (int i = 0; i < cards.size(); i++) {
+            FXMLLoader loader = new FXMLLoader();
+            // if minion card
+            if (cards.get(i) instanceof Minion) {
+                // load fmxl of the card
+                loader.setLocation(Main.class.getResource("minion.fxml"));
+                Button cardUI = (Button) loader.load();
+                MinionController cc = (MinionController) loader.getController();
+                cc.renderCard((Minion) cards.get(i));
+
+                // display card on right hand
+                if (p == GameManager.getInstance().getPlayer1()) {
+                    this.player1Hand.getChildren().add(cardUI);
+                } else {
+                    this.player2Hand.getChildren().add(cardUI);
+                }
+            } else { // if spell card
+                // TODO: Handle spell card
             }
         }
     }
