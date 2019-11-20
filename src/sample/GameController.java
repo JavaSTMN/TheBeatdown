@@ -38,6 +38,12 @@ public class GameController implements Initializable {
     @FXML
     private HBox player2Hand;
 
+    @FXML
+    private HBox player1Board;
+
+    @FXML
+    private HBox player2Board;
+
     /**
      * Inits the game visuals
      * @param location
@@ -45,6 +51,7 @@ public class GameController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        instance = this;
         renderEverything();
     }
 
@@ -53,31 +60,47 @@ public class GameController implements Initializable {
         // TODO: Render mana reserves
         renderHands();
         // TODO: Render decks
-        // TODO: Render boards
+        renderBoards();
     }
 
     /** HEROES **/
 
+    /**
+     * Renders all that is related to the heroes
+     */
     public void renderHeroes() {
         initHeroesPortraits();
         // TODO: Render rest of heroes stuff
     }
 
+    /**
+     * Inits portraits of both heroes.
+     */
+    private void initHeroesPortraits() {
+        // player1
+        Image imgP1 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer1().getImage()).toURI().toString());
+        player1Portrait.setImage(imgP1);
+
+        // player2
+        Image imgP2 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer2().getImage()).toURI().toString());
+        player2Portrait.setImage(imgP2);
+    }
+
     /** HANDS **/
 
     /**
-     * Renders the hands of both players
+     * Renders the hands of both players.
      */
-    private void renderHands() {
-            renderHand(GameManager.getInstance().getPlayer1());
-            renderHand(GameManager.getInstance().getPlayer2());
+    public void renderHands() {
+        renderHand(GameManager.getInstance().getPlayer1());
+        renderHand(GameManager.getInstance().getPlayer2());
     }
 
     /**
      * Renders the hand of the given player.
      * @param p
      */
-    private void renderHand(Player p)  {
+    public void renderHand(Player p)  {
         ArrayList<Card> cards = p.getHand().getCards();
 
         for (int i = 0; i < cards.size(); i++) {
@@ -121,15 +144,29 @@ public class GameController implements Initializable {
         }
     }
 
-    /** HANDS **/
+    /** BOARD **/
 
-    private void initHeroesPortraits() {
-        // player1
-        Image imgP1 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer1().getImage()).toURI().toString());
-        player1Portrait.setImage(imgP1);
+    /**
+     * Renders the boards of both players.
+     */
+    public void renderBoards() {
+        renderBoard(GameManager.getInstance().getPlayer1());
+        renderBoard(GameManager.getInstance().getPlayer2());
+    }
 
-        // player2
-        Image imgP2 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer2().getImage()).toURI().toString());
-        player2Portrait.setImage(imgP2);
+    /**
+     * Renders the board of the given player.
+     * @param p
+     */
+    public void renderBoard(Player p)  {
+        ArrayList<Minion> minions = p.getBoard();
+
+        for (int i = 0; i < minions.size(); i++) {
+            if (p == GameManager.getInstance().getPlayer1()) {
+                renderCard(minions.get(i), this.player1Board);
+            } else {
+                renderCard(minions.get(i), this.player2Board);
+            }
+        }
     }
 }

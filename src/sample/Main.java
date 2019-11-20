@@ -15,11 +15,13 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("The Beatdown");
-        this.primaryStage.setScene(new Scene(root, 1366, 768));
+        this.primaryStage.setScene(new Scene(root, 1400, 800));
         //primaryStage.setFullScreen(true);
         this.primaryStage.show();
 
-
+        // Tests displaying stuff on board
+        //GameManager.getInstance().getPlayer1().getBoard().add((Minion)GameManager.getInstance().getPlayer1().getHand().getCards().get(0));
+        //GameController.getInstance().renderBoards();
     }
 
     public static void main(String[] args) {
