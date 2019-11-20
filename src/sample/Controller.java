@@ -1,10 +1,17 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +33,12 @@ public class Controller implements Initializable {
     @FXML
     private ImageView player2Portrait;
 
+    @FXML
+    private HBox player1Hand;
+
+    @FXML
+    private HBox player2Hand;
+
     /**
      * Inits the game visuals
      * @param location
@@ -39,9 +52,34 @@ public class Controller implements Initializable {
     private void renderEverything() {
         renderHeroes();
         // TODO: Render mana reserves
-        // TODO: Render hands
+        renderHands();
         // TODO: Render decks
         // TODO: Render boards
+    }
+
+    private void renderHands() {
+        try {
+            renderHand(GameManager.getInstance().getPlayer1());
+            renderHand(GameManager.getInstance().getPlayer2());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void renderHand(Player p) throws IOException {
+        for (int i = 0; i < p.getHand().getCards().size() + 6; i++) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("card.fxml"));
+            Button handContainer = (Button) loader.load();
+
+            // Set person overview into the center of root layout.
+            //personOverview.setTranslateX(50*i+1);
+            if (p == GameManager.getInstance().getPlayer1()) {
+                this.player1Hand.getChildren().add(handContainer);
+            } else {
+                this.player2Hand.getChildren().add(handContainer);
+            }
+        }
     }
 
     public void renderHeroes() {

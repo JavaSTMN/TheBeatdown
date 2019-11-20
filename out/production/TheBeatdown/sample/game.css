@@ -1,0 +1,15 @@
+.background {
+    -fx-background-color: black;
+}
+
+.top {
+    -fx-background-color: red;
+}
+
+.bot {
+    -fx-background-color: green;
+}
+
+.card-background {
+    -fx-background-color: white;
+}
