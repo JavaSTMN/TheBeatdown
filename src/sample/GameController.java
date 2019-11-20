@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,41 +57,47 @@ public class GameController implements Initializable {
     }
 
     private void renderHands() {
-        try {
             renderHand(GameManager.getInstance().getPlayer1());
             renderHand(GameManager.getInstance().getPlayer2());
-        } catch (IOException e) {
-            e.printStackTrace();
+    }
+
+    private void renderHand(Player p)  {
+        ArrayList<Card> cards = p.getHand().getCards();
+
+        for (int i = 0; i < cards.size(); i++) {
+            if (p == GameManager.getInstance().getPlayer1()) {
+                renderCard(cards.get(i), this.player1Hand);
+            } else {
+                renderCard(cards.get(i), this.player2Hand);
+            }
         }
     }
 
-    private void renderHand(Player p) throws IOException {
-        ArrayList<Card> cards = p.getHand().getCards();
-        Button cardUI;
 
-        for (int i = 0; i < cards.size(); i++) {
+    private void renderCard(Card cardToRender, Pane container) {
+        try {
             FXMLLoader loader = new FXMLLoader();
+            Button cardUI;
+
             // if minion card
-            if (cards.get(i) instanceof Minion) {
+            if (cardToRender instanceof Minion) {
                 // load fmxl of the card
                 loader.setLocation(Main.class.getResource("minion.fxml"));
                 cardUI = (Button) loader.load();
                 MinionController cc = (MinionController) loader.getController();
-                cc.renderCard((Minion) cards.get(i));
+                cc.renderCard((Minion) cardToRender);
             } else { // if spell card
                 // load fmxl of the card
                 loader.setLocation(Main.class.getResource("spell.fxml"));
                 cardUI = (Button) loader.load();
                 SpellController cc = (SpellController) loader.getController();
-                cc.renderCard((Spell) cards.get(i));
+                cc.renderCard((Spell) cardToRender);
             }
 
             // display card
-            if (p == GameManager.getInstance().getPlayer1()) {
-                this.player1Hand.getChildren().add(cardUI);
-            } else {
-                this.player2Hand.getChildren().add(cardUI);
-            }
+            container.getChildren().add(cardUI);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

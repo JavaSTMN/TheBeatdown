@@ -18,6 +18,8 @@ public class Main extends Application {
         this.primaryStage.setScene(new Scene(root, 1366, 768));
         //primaryStage.setFullScreen(true);
         this.primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
