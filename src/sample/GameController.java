@@ -66,6 +66,7 @@ public class GameController implements Initializable {
 
     private void renderHand(Player p) throws IOException {
         ArrayList<Card> cards = p.getHand().getCards();
+        Button cardUI;
 
         for (int i = 0; i < cards.size(); i++) {
             FXMLLoader loader = new FXMLLoader();
@@ -73,18 +74,22 @@ public class GameController implements Initializable {
             if (cards.get(i) instanceof Minion) {
                 // load fmxl of the card
                 loader.setLocation(Main.class.getResource("minion.fxml"));
-                Button cardUI = (Button) loader.load();
+                cardUI = (Button) loader.load();
                 MinionController cc = (MinionController) loader.getController();
                 cc.renderCard((Minion) cards.get(i));
-
-                // display card on right hand
-                if (p == GameManager.getInstance().getPlayer1()) {
-                    this.player1Hand.getChildren().add(cardUI);
-                } else {
-                    this.player2Hand.getChildren().add(cardUI);
-                }
             } else { // if spell card
-                // TODO: Handle spell card
+                // load fmxl of the card
+                loader.setLocation(Main.class.getResource("spell.fxml"));
+                cardUI = (Button) loader.load();
+                SpellController cc = (SpellController) loader.getController();
+                cc.renderCard((Spell) cards.get(i));
+            }
+
+            // display card
+            if (p == GameManager.getInstance().getPlayer1()) {
+                this.player1Hand.getChildren().add(cardUI);
+            } else {
+                this.player2Hand.getChildren().add(cardUI);
             }
         }
     }
