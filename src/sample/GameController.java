@@ -56,11 +56,27 @@ public class GameController implements Initializable {
         // TODO: Render boards
     }
 
+    /** HEROES **/
+
+    public void renderHeroes() {
+        initHeroesPortraits();
+        // TODO: Render rest of heroes stuff
+    }
+
+    /** HANDS **/
+
+    /**
+     * Renders the hands of both players
+     */
     private void renderHands() {
             renderHand(GameManager.getInstance().getPlayer1());
             renderHand(GameManager.getInstance().getPlayer2());
     }
 
+    /**
+     * Renders the hand of the given player.
+     * @param p
+     */
     private void renderHand(Player p)  {
         ArrayList<Card> cards = p.getHand().getCards();
 
@@ -73,7 +89,11 @@ public class GameController implements Initializable {
         }
     }
 
-
+    /**
+     * Renders a card in a given UI container.
+     * @param cardToRender
+     * @param container
+     */
     private void renderCard(Card cardToRender, Pane container) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -101,10 +121,7 @@ public class GameController implements Initializable {
         }
     }
 
-    public void renderHeroes() {
-        initHeroesPortraits();
-        // TODO: Render rest of heroes stuff
-    }
+    /** HANDS **/
 
     private void initHeroesPortraits() {
         // player1
