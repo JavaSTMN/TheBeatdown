@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,6 +53,12 @@ public class GameController implements Initializable {
     @FXML
     private ProgressIndicator player2TurnIndicator;
 
+    @FXML
+    private Label player1DeckSize;
+
+    @FXML
+    private Label player2DeckSize;
+
     /**
      * Inits the game visuals
      * @param location
@@ -82,7 +89,7 @@ public class GameController implements Initializable {
         renderHeroes();
         // TODO: Render mana reserves
         renderHands();
-        // TODO: Render decks
+        renderDecks();
         renderBoards();
     }
 
@@ -205,6 +212,29 @@ public class GameController implements Initializable {
         ArrayList<Minion> minions = p.getBoard();
         for (int i = 0; i < minions.size(); i++) {
             renderCard(minions.get(i), rightContainer);
+        }
+    }
+
+    /** DECK **/
+
+    /**
+     * Renders both decks.
+     */
+    private void renderDecks() {
+        renderDeck(GameManager.getInstance().getPlayer1());
+        renderDeck(GameManager.getInstance().getPlayer2());
+    }
+
+    /**
+     * Renders the deck of the given player.
+     * @param p
+     */
+    private void renderDeck(Player p) {
+        int deckSize = p.getDeck().getCards().size();
+        if (p == GameManager.getInstance().getPlayer1()) {
+            this.player1DeckSize.setText(Integer.toString(deckSize));
+        } else {
+            this.player2DeckSize.setText(Integer.toString(deckSize));
         }
     }
 }
