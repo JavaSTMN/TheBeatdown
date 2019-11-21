@@ -19,7 +19,7 @@ public class GameJsonParser<T> {
     final Class<T> typeParameterClass;
 
     public GameJsonParser(Class<T> typeParameterClass) {
-        jsonFile = getFileFromResources("game.json");
+        jsonFile = Utils.getFileFromResources("game.json");
         this.typeParameterClass = typeParameterClass;
     }
 
@@ -175,21 +175,5 @@ public class GameJsonParser<T> {
         s.setActionParam(Integer.parseInt(spell.get("actionParam").toString()));
 
         return s;
-    }
-
-    /**
-     * Gets a file from the resources folder
-     * @param fileName
-     * @return
-     */
-    private File getFileFromResources(String fileName) {
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
-            throw new IllegalArgumentException("file is not found!");
-        } else {
-            return new File(resource.getFile());
-        }
     }
 }
