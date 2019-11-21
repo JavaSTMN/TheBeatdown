@@ -34,7 +34,7 @@ public class MinionController {
 
     public void renderCard(Minion m) {
         this.manaCost.setText(Integer.toString(m.getCost()));
-        //this.portrait.setImage(new Image(Utils.getFileFromResources(m.getImage()).toURI().toString()));
+        this.portrait.setImage(new Image(Utils.getFileFromResources(m.getImage()).toURI().toString()));
         this.name.setText(m.getName());
         this.atk.setText(Integer.toString(m.getDmg()));
         this.health.setText(Integer.toString(m.getCurrentHP()));

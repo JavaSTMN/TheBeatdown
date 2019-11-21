@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -22,7 +23,7 @@ public class SpellController {
 
     public void renderCard(Spell s) {
         this.manaCost.setText(Integer.toString(s.getCost()));
-        //this.portrait.setImage(new Image(Utils.getFileFromResources(m.getImage()).toURI().toString()));
+        this.portrait.setImage(new Image(Utils.getFileFromResources(s.getImage()).toURI().toString()));
         this.name.setText(s.getName());
         this.desc.setText(s.getDescription());
     }

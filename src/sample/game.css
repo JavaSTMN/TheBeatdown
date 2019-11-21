@@ -1,13 +1,9 @@
 .background {
-    -fx-background-color: black;
+    -fx-background-color: #BBBBBB;
 }
 
-.top {
-    -fx-background-color: red;
-}
-
-.bot {
-    -fx-background-color: green;
+.board {
+    -fx-background-color: 	#e3e3e4;
 }
 
 .card-background {

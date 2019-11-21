@@ -5,18 +5,18 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" styleClass="background" stylesheets="@game.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
-       <VBox prefHeight="10000.0" prefWidth="10000.0" styleClass="top" stylesheets="@game.css">
+       <VBox prefHeight="10000.0" prefWidth="10000.0" stylesheets="@game.css">
            <children>
             <HBox fx:id="player2Hand" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                    <children>
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                    </children></HBox>
-               <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
+               <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
            </children></VBox>
-       <VBox prefHeight="10000.0" prefWidth="10000.0" styleClass="bot" stylesheets="@game.css">
+       <VBox prefHeight="10000.0" prefWidth="10000.0" stylesheets="@game.css">
          <children>
-             <HBox fx:id="player1Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
+             <HBox fx:id="player1Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                <children>
                   <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
