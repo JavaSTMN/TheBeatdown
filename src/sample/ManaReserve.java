@@ -1,6 +1,7 @@
 package sample;
 
 
+import java.io.IOException;
 
 public class ManaReserve extends Observable {
 
@@ -43,7 +44,7 @@ public class ManaReserve extends Observable {
         this.ObserverMana.add(viewMana);
     }
 
-    public void addManaMax(int amount) {
+    public void addManaMax(int amount) throws IOException {
         int manaMax = getMaxMana();
         int slotsMax=getMaxManaSlots();
         if((manaMax+amount)<slotsMax){
@@ -53,7 +54,7 @@ public class ManaReserve extends Observable {
         notification();
     }
 
-    public void refillMana(int amount) {
+    public void refillMana(int amount) throws IOException {
         int manaMax = getMaxMana();
         int current = getCurrentMana();
         if(current+amount<=manaMax){
@@ -76,7 +77,7 @@ public class ManaReserve extends Observable {
         }
     }
 
-    public void decreaseMana(int amount) {
+    public void decreaseMana(int amount) throws IOException {
         if(hasEnoughMana(amount)) {
             int current=getCurrentMana();
             setCurrentMana(current-amount);

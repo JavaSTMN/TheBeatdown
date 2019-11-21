@@ -21,18 +21,16 @@ public class Main extends Application {
     private BorderPane rootLayout;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("TheBeatDown");
         initRootLayout();
         ViewMana viewMana = new ViewMana();
         viewMana.subscribe();
-        viewMana.setPrimaryStage(this.rootLayout);
+        viewMana.setPrimaryStage(this.primaryStage);
         System.out.println("Start after set");
         viewMana.getManaReserve().addManaMax(1);
         System.out.println("Start after addMaxMana");
-        primaryStage.setScene(viewMana.scene);
-        primaryStage.show();
     }
 
     public void initRootLayout() {

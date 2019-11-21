@@ -1,5 +1,6 @@
 package sample;
 
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -136,7 +137,7 @@ public class GameManager {
      * triggers the set turn for the other player
      * @param p
      */
-    public void endTurn(Player p) {
+    public void endTurn(Player p) throws IOException {
         if (p.equals(player1)) {
             setTurn(player2);
         } else if (p.equals(player2)) {
@@ -144,7 +145,7 @@ public class GameManager {
         }
     }
 
-    public void setTurn(Player p) {
+    public void setTurn(Player p) throws IOException {
         // TODO: inverser l'affichage du board
 
         // enable hero power
