@@ -6,18 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-
-
 public class Main extends Application {
+
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("The Beatdown");
+        this.primaryStage.setScene(new Scene(root, 1400, 800));
+        //primaryStage.setFullScreen(true);
+        this.primaryStage.show();
+
+        // Tests displaying stuff on board
+        //GameManager.getInstance().getPlayer1().getBoard().add((Minion)GameManager.getInstance().getPlayer1().getHand().getCards().get(0));
+        //GameController.getInstance().renderBoards();
     }
 
     public static void main(String[] args) {

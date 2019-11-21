@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+
+<Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="140.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MinionController">
+   <graphic>
+      <AnchorPane prefHeight="20000.0" prefWidth="20000.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <StackPane alignment="TOP_LEFT" prefHeight="0.0" prefWidth="97.0">
+                     <children>
+                        <Circle fill="DODGERBLUE" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="manaCost" alignment="CENTER" prefHeight="17.0" prefWidth="17.0" text="50" textAlignment="CENTER">
+                           <padding>
+                              <Insets left="2.0" />
+                           </padding></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="1.5" left="3.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <ImageView fx:id="portrait" fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="112.0" styleClass="card-title" stylesheets="@game.css" text="Golemagg" />
+                  <HBox prefHeight="23.0" prefWidth="100.0" spacing="54.0">
+                     <children>
+                        <StackPane alignment="TOP_LEFT" prefHeight="18.0" prefWidth="13.0">
+                           <children>
+                              <Circle fill="#ffeb1f" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label fx:id="atk" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="16.0" text="20" textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="2.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </VBox.margin>
+                           <HBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </HBox.margin>
+                        </StackPane>
+                        <StackPane alignment="TOP_LEFT" prefHeight="18.0" prefWidth="13.0">
+                           <children>
+                              <Circle fill="#ff4a4a" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label fx:id="health" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="30.0" text="20">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </VBox.margin>
+                           <HBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </HBox.margin>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </graphic>
+</Button>
