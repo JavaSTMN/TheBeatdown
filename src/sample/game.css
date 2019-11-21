@@ -9,3 +9,7 @@
 .card-background {
     -fx-background-color: white;
 }
+
+.card-title {
+    -fx-font-weight	: bold;
+}
