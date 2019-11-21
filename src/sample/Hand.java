@@ -67,11 +67,14 @@ public class Hand {
     }
 
     public void playCard(Card card) {
+        int manaAmount = card.getCost();
         if (card instanceof Minion) {
             this.placeMinionOnBoard((Minion)card);
         } else {
             this.useSpell((Spell)card);
         }
+        ManaReserve playerManaReserve = this.getPlayer().getManaReserve();
+        playerManaReserve.setCurrentMana(playerManaReserve.getCurrentMana() - manaAmount);
     }
 
     public void placeMinionOnBoard(Minion minion) {
