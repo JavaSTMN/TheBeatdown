@@ -28,11 +28,25 @@
                   <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="112.0" styleClass="card-title" stylesheets="@game.css" text="Golemagg" />
                   <HBox prefHeight="23.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="atk" prefHeight="17.0" prefWidth="79.0" text="20">
+                        <StackPane alignment="TOP_LEFT" prefHeight="18.0" prefWidth="13.0">
+                           <children>
+                              <Circle fill="#ffeb1f" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label fx:id="atk" alignment="CENTER" prefHeight="17.0" prefWidth="16.0" text="20" textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="2.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </VBox.margin>
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets bottom="1.5" left="3.0" />
                            </HBox.margin>
-                        </Label>
+                        </StackPane>
                         <Label fx:id="health" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="83.0" text="20">
                            <HBox.margin>
                               <Insets right="5.0" />
