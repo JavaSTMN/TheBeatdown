@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -45,6 +46,12 @@ public class GameController implements Initializable {
     @FXML
     private HBox player2Board;
 
+    @FXML
+    private ProgressIndicator player1TurnIndicator;
+
+    @FXML
+    private ProgressIndicator player2TurnIndicator;
+
     /**
      * Inits the game visuals
      * @param location
@@ -58,7 +65,17 @@ public class GameController implements Initializable {
 
     @FXML
     protected void handleEndTurnAction(ActionEvent event) {
-        GameManager.getInstance().endTurn(GameManager.getInstance().getCurrentTurnPlayer());
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+
+        if (currentTurnPlayer == GameManager.getInstance().getPlayer1()) {
+            this.player1TurnIndicator.setVisible(false);
+            this.player2TurnIndicator.setVisible(true);
+        } else {
+            this.player1TurnIndicator.setVisible(true);
+            this.player2TurnIndicator.setVisible(false);
+        }
+
+        GameManager.getInstance().endTurn(currentTurnPlayer);
     }
 
     public void renderEverything() {

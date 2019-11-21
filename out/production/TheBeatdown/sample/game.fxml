@@ -14,6 +14,7 @@
                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                    <children>
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="40.0" prefWidth="24.0" visible="false" />
                    </children></HBox>
                <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
            </children></VBox>
@@ -32,6 +33,7 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                <children>
                   <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ProgressIndicator fx:id="player1TurnIndicator" prefHeight="40.0" prefWidth="24.0" />
                </children></HBox>
             <HBox fx:id="player1Hand" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
          </children></VBox>
