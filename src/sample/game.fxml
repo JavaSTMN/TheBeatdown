@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" styleClass="background" stylesheets="@game.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
@@ -14,6 +17,15 @@
                    </children></HBox>
                <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
            </children></VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="board" stylesheets="@game.css">
+         <children>
+            <Rectangle fill="#dc3d31" height="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1253.0">
+               <HBox.margin>
+                  <Insets top="9.0" />
+               </HBox.margin></Rectangle>
+            <Button mnemonicParsing="false" onAction="#handleEndTurnAction" prefHeight="25.0" prefWidth="806.0" text="Terminer tour" />
+         </children>
+      </HBox>
        <VBox prefHeight="10000.0" prefWidth="10000.0" stylesheets="@game.css">
          <children>
              <HBox fx:id="player1Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />

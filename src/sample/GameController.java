@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,7 +56,12 @@ public class GameController implements Initializable {
         renderEverything();
     }
 
-    private void renderEverything() {
+    @FXML
+    protected void handleEndTurnAction(ActionEvent event) {
+        GameManager.getInstance().endTurn(GameManager.getInstance().getCurrentTurnPlayer());
+    }
+
+    public void renderEverything() {
         renderHeroes();
         // TODO: Render mana reserves
         renderHands();
@@ -101,14 +107,22 @@ public class GameController implements Initializable {
      * @param p
      */
     public void renderHand(Player p)  {
+        // get the right (good) hand container for the player p
+        Pane rightContainer;
+        if (p == GameManager.getInstance().getPlayer1()) {
+            rightContainer = this.player1Hand;
+        } else {
+            rightContainer = this.player2Hand;
+        }
+
+        // clear the container
+        rightContainer.getChildren().clear();
+
+        // render cards in the hand
         ArrayList<Card> cards = p.getHand().getCards();
 
         for (int i = 0; i < cards.size(); i++) {
-            if (p == GameManager.getInstance().getPlayer1()) {
-                renderCard(cards.get(i), this.player1Hand);
-            } else {
-                renderCard(cards.get(i), this.player2Hand);
-            }
+            renderCard(cards.get(i), rightContainer);
         }
     }
 
@@ -159,14 +173,21 @@ public class GameController implements Initializable {
      * @param p
      */
     public void renderBoard(Player p)  {
-        ArrayList<Minion> minions = p.getBoard();
+        // get the right (good) board container for the player p
+        Pane rightContainer;
+        if (p == GameManager.getInstance().getPlayer1()) {
+            rightContainer = this.player1Board;
+        } else {
+            rightContainer = this.player2Board;
+        }
 
+        // clear the container
+        rightContainer.getChildren().clear();
+
+        // add the cards to the container
+        ArrayList<Minion> minions = p.getBoard();
         for (int i = 0; i < minions.size(); i++) {
-            if (p == GameManager.getInstance().getPlayer1()) {
-                renderCard(minions.get(i), this.player1Board);
-            } else {
-                renderCard(minions.get(i), this.player2Board);
-            }
+            renderCard(minions.get(i), rightContainer);
         }
     }
 }
