@@ -1,0 +1,15 @@
+.background {
+    -fx-background-color: #BBBBBB;
+}
+
+.board {
+    -fx-background-color: 	#e3e3e4;
+}
+
+.card-background {
+    -fx-background-color: white;
+}
+
+.card-title {
+    -fx-font-weight	: bold;
+}
