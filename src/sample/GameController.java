@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -44,6 +47,18 @@ public class GameController implements Initializable {
     @FXML
     private HBox player2Board;
 
+    @FXML
+    private ProgressIndicator player1TurnIndicator;
+
+    @FXML
+    private ProgressIndicator player2TurnIndicator;
+
+    @FXML
+    private Label player1DeckSize;
+
+    @FXML
+    private Label player2DeckSize;
+
     /**
      * Inits the game visuals
      * @param location
@@ -55,11 +70,26 @@ public class GameController implements Initializable {
         renderEverything();
     }
 
-    private void renderEverything() {
+    @FXML
+    protected void handleEndTurnAction(ActionEvent event) {
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+
+        if (currentTurnPlayer == GameManager.getInstance().getPlayer1()) {
+            this.player1TurnIndicator.setVisible(false);
+            this.player2TurnIndicator.setVisible(true);
+        } else {
+            this.player1TurnIndicator.setVisible(true);
+            this.player2TurnIndicator.setVisible(false);
+        }
+
+        GameManager.getInstance().endTurn(currentTurnPlayer);
+    }
+
+    public void renderEverything() {
         renderHeroes();
         // TODO: Render mana reserves
         renderHands();
-        // TODO: Render decks
+        renderDecks();
         renderBoards();
     }
 
@@ -101,14 +131,22 @@ public class GameController implements Initializable {
      * @param p
      */
     public void renderHand(Player p)  {
+        // get the right (good) hand container for the player p
+        Pane rightContainer;
+        if (p == GameManager.getInstance().getPlayer1()) {
+            rightContainer = this.player1Hand;
+        } else {
+            rightContainer = this.player2Hand;
+        }
+
+        // clear the container
+        rightContainer.getChildren().clear();
+
+        // render cards in the hand
         ArrayList<Card> cards = p.getHand().getCards();
 
         for (int i = 0; i < cards.size(); i++) {
-            if (p == GameManager.getInstance().getPlayer1()) {
-                renderCard(cards.get(i), this.player1Hand);
-            } else {
-                renderCard(cards.get(i), this.player2Hand);
-            }
+            renderCard(cards.get(i), rightContainer);
         }
     }
 
@@ -159,14 +197,44 @@ public class GameController implements Initializable {
      * @param p
      */
     public void renderBoard(Player p)  {
-        ArrayList<Minion> minions = p.getBoard();
+        // get the right (good) board container for the player p
+        Pane rightContainer;
+        if (p == GameManager.getInstance().getPlayer1()) {
+            rightContainer = this.player1Board;
+        } else {
+            rightContainer = this.player2Board;
+        }
 
+        // clear the container
+        rightContainer.getChildren().clear();
+
+        // add the cards to the container
+        ArrayList<Minion> minions = p.getBoard();
         for (int i = 0; i < minions.size(); i++) {
-            if (p == GameManager.getInstance().getPlayer1()) {
-                renderCard(minions.get(i), this.player1Board);
-            } else {
-                renderCard(minions.get(i), this.player2Board);
-            }
+            renderCard(minions.get(i), rightContainer);
+        }
+    }
+
+    /** DECK **/
+
+    /**
+     * Renders both decks.
+     */
+    private void renderDecks() {
+        renderDeck(GameManager.getInstance().getPlayer1());
+        renderDeck(GameManager.getInstance().getPlayer2());
+    }
+
+    /**
+     * Renders the deck of the given player.
+     * @param p
+     */
+    private void renderDeck(Player p) {
+        int deckSize = p.getDeck().getCards().size();
+        if (p == GameManager.getInstance().getPlayer1()) {
+            this.player1DeckSize.setText(Integer.toString(deckSize));
+        } else {
+            this.player2DeckSize.setText(Integer.toString(deckSize));
         }
     }
 }

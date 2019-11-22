@@ -10,6 +10,7 @@ public class GameManager {
     private static GameManager instance;
     private Player player1;
     private Player player2;
+    private Player currentTurnPlayer;
     private float maxTurnDuration = 60;
     private int maxDeckSize = 20;
     private int maxHandSize = 8;
@@ -48,6 +49,14 @@ public class GameManager {
 
     public void setMaxTurnDuration(float maxTurnDuration) {
         this.maxTurnDuration = maxTurnDuration;
+    }
+
+    public Player getCurrentTurnPlayer() {
+        return currentTurnPlayer;
+    }
+
+    public void setCurrentTurnPlayer(Player currentTurnPlayer) {
+        this.currentTurnPlayer = currentTurnPlayer;
     }
 
     /**
@@ -145,8 +154,6 @@ public class GameManager {
     }
 
     public void setTurn(Player p) {
-        // TODO: inverser l'affichage du board
-
         // enable hero power
         p.setHeroSpellAvailable(true);
 
@@ -169,5 +176,12 @@ public class GameManager {
             p.setHpLostPerTurn(p.getHpLostPerTurn() + 1);
             p.triggerHPLossPerTurn();
         }
+
+        // set current turn player
+        this.currentTurnPlayer = p;
+
+        // refresh graphics
+        if (GameController.getInstance() != null)
+            GameController.getInstance().renderEverything();
     }
 }

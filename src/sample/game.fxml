@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" styleClass="background" stylesheets="@game.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
@@ -10,16 +14,68 @@
             <HBox fx:id="player2Hand" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                    <children>
+                  <StackPane prefHeight="100.0" prefWidth="99.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dc3d31" height="85.0" stroke="WHITE" strokeType="INSIDE" width="69.0" />
+                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="57.0" text="DECK" textAlignment="CENTER" textFill="WHITE">
+                           <StackPane.margin>
+                              <Insets bottom="45.0" />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="player2DeckSize" alignment="CENTER" layoutX="31.0" layoutY="25.0" prefHeight="26.0" prefWidth="57.0" text="20" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets top="25.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="40.0" prefWidth="24.0" visible="false" />
                    </children></HBox>
                <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
            </children></VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="board" stylesheets="@game.css">
+         <children>
+            <Rectangle fill="#dc3d31" height="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1253.0">
+               <HBox.margin>
+                  <Insets top="9.0" />
+               </HBox.margin></Rectangle>
+            <Button mnemonicParsing="false" onAction="#handleEndTurnAction" prefHeight="25.0" prefWidth="806.0" text="Terminer tour" />
+         </children>
+      </HBox>
        <VBox prefHeight="10000.0" prefWidth="10000.0" stylesheets="@game.css">
          <children>
              <HBox fx:id="player1Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="128.0" prefWidth="10000.0">
                <children>
+                  <StackPane prefHeight="100.0" prefWidth="99.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dc3d31" height="85.0" stroke="WHITE" strokeType="INSIDE" width="69.0" />
+                        <Label alignment="CENTER" prefHeight="26.0" prefWidth="57.0" text="DECK" textAlignment="CENTER" textFill="WHITE">
+                           <StackPane.margin>
+                              <Insets bottom="45.0" />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="player1DeckSize" alignment="CENTER" layoutX="31.0" layoutY="25.0" prefHeight="26.0" prefWidth="57.0" text="20" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets top="25.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
                   <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ProgressIndicator fx:id="player1TurnIndicator" prefHeight="40.0" prefWidth="24.0" />
                </children></HBox>
             <HBox fx:id="player1Hand" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
          </children></VBox>
