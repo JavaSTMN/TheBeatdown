@@ -42,10 +42,11 @@ public class SpellController {
         Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
 
         // check if it's player's allowed to use the spell and if he has enough mana
-        if (this.owner == currentTurnPlayer){ // && currentTurnPlayer.getManaReserve().hasEnoughMana(this.spell.getCost())) {
+        if (this.owner == currentTurnPlayer && currentTurnPlayer.getManaReserve().hasEnoughMana(this.spell.getCost())) {
             ISpell is = (ISpell) this.spell;
+            System.out.println("Before, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
             is.useSpell(currentTurnPlayer, currentTurnPlayer); // use the right spell
-            System.out.println(currentTurnPlayer.getManaReserve().getMaxMana());
+            System.out.println("After, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
 
             // refresh UI
             GameController.getInstance().renderEverything();

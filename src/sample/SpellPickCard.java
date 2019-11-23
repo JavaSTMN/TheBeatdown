@@ -2,7 +2,7 @@ package sample;
 
 import java.util.ArrayList;
 
-public class SpellPickCard extends Spell {
+public class SpellPickCard extends Spell implements ISpell {
 
     public SpellPickCard() {}
 
@@ -10,9 +10,11 @@ public class SpellPickCard extends Spell {
         super(name, description, cost, image, actionParam);
     }
 
-    public void use(Player player) {
-        Deck deck = player.getDeck();
+    public void useSpell(Player caster, Object receiver) {
+        Deck deck = caster.getDeck();
         ArrayList<Card> cards = deck.pickCardsFromDeck(this.getActionParam());
-        player.getHand().addCards(cards);
+        caster.getHand().addCards(cards);
+
+        super.useSpell(caster, receiver);
     }
 }

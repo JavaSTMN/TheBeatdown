@@ -26,5 +26,11 @@ public abstract class Spell extends Card implements ISpell {
         this.actionParam = actionParam;
     }
 
-    public void useSpell(Object caster, Object receiver) {}
+    public void useSpell(Player caster, Object receiver) {
+        // remove cost from current mana
+        caster.getManaReserve().decreaseMana(this.getCost());
+
+        // remove card from hand
+        caster.getHand().removeCard(this);
+    }
 }

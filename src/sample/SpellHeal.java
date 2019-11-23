@@ -26,5 +26,7 @@ public class SpellHeal extends Spell {
                 player.setCurrentHP(totalAmount);
             }
         }
+
+        //super.useSpell(caster, receiver);
     }
 }
