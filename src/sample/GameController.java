@@ -163,7 +163,7 @@ public class GameController implements Initializable {
         ArrayList<Card> cards = p.getHand().getCards();
 
         for (int i = 0; i < cards.size(); i++) {
-            renderCard(cards.get(i), rightContainer);
+            renderCard(cards.get(i), rightContainer, p);
         }
     }
 
@@ -172,7 +172,7 @@ public class GameController implements Initializable {
      * @param cardToRender
      * @param container
      */
-    private void renderCard(Card cardToRender, Pane container) {
+    private void renderCard(Card cardToRender, Pane container, Player owner) {
         try {
             FXMLLoader loader = new FXMLLoader();
             Button cardUI;
@@ -189,6 +189,7 @@ public class GameController implements Initializable {
                 loader.setLocation(Main.class.getResource("spell.fxml"));
                 cardUI = (Button) loader.load();
                 SpellController cc = (SpellController) loader.getController();
+                cc.setOwner(owner);
                 cc.renderCard((Spell) cardToRender);
             }
 
@@ -228,7 +229,7 @@ public class GameController implements Initializable {
         // add the cards to the container
         ArrayList<Minion> minions = p.getBoard();
         for (int i = 0; i < minions.size(); i++) {
-            renderCard(minions.get(i), rightContainer);
+            renderCard(minions.get(i), rightContainer, p);
         }
     }
 

@@ -1,6 +1,6 @@
 package sample;
 
-public abstract class Spell extends Card {
+public abstract class Spell extends Card implements ISpell {
 
     public enum SpellType {
         RANDOM_SPLITTED_DMG,
@@ -26,5 +26,5 @@ public abstract class Spell extends Card {
         this.actionParam = actionParam;
     }
 
-    public void use() {}
+    public void useSpell(Object caster, Object receiver) {}
 }

@@ -83,6 +83,6 @@ public class Hand {
     }
 
     public void useSpell(Spell spell) {
-        spell.use();
+        //spell.use();
     }
 }

@@ -38,7 +38,7 @@
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                       <VBox prefHeight="100.0" prefWidth="32.0">
                          <children>
-                            <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="40.0" prefWidth="24.0" />
+                            <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="40.0" prefWidth="24.0" visible="false" />
                             <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
                                <children>
                                   <Circle fill="#ff4a4a" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
