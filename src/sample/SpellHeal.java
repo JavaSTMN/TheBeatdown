@@ -11,7 +11,7 @@ public class SpellHeal extends Spell {
     public void use(Object o) {
         if (o instanceof Minion) {
             Minion minion = (Minion) o;
-            int totalAmount = minion.getCurrentHP() + this.getActionParam();
+            int totalAmount = minion.getCurrentHP() + super.getActionParam();
             if (totalAmount > minion.getMaxHP()) {
                 minion.setCurrentHP(minion.getMaxHP());
             } else {
@@ -19,7 +19,7 @@ public class SpellHeal extends Spell {
             }
         } else if (o instanceof Player) {
             Player player = (Player) o;
-            int totalAmount = player.getCurrentHP() + this.getActionParam();
+            int totalAmount = player.getCurrentHP() + super.getActionParam();
             if (totalAmount > player.getMaxHP()) {
                 player.setCurrentHP(player.getMaxHP());
             } else {

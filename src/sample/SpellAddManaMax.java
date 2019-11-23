@@ -11,7 +11,7 @@ public class SpellAddManaMax extends Spell implements ISpell {
     public void useSpell(Player caster, Object receiver) {
         // adds extra mana crystal
         ManaReserve manaReserve = caster.getManaReserve();
-        manaReserve.setMaxMana(manaReserve.getMaxMana() + 1);
+        manaReserve.setMaxMana(manaReserve.getMaxMana() + super.getActionParam());
 
         super.useSpell(caster, receiver);
     }

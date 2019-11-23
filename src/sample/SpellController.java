@@ -39,13 +39,20 @@ public class SpellController {
 
     @FXML
     protected void handleSpellUse(ActionEvent event) {
+        // determine current player and other player
         Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+        Player otherPlayer;
+        if (currentTurnPlayer == GameManager.getInstance().getPlayer1()) {
+            otherPlayer = GameManager.getInstance().getPlayer2();
+        } else {
+            otherPlayer = GameManager.getInstance().getPlayer1();
+        }
 
         // check if it's player's allowed to use the spell and if he has enough mana
         if (this.owner == currentTurnPlayer && currentTurnPlayer.getManaReserve().hasEnoughMana(this.spell.getCost())) {
             ISpell is = (ISpell) this.spell;
             System.out.println("Before, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
-            is.useSpell(currentTurnPlayer, currentTurnPlayer); // use the right spell
+            is.useSpell(currentTurnPlayer, otherPlayer); // use the right spell
             System.out.println("After, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
 
             // refresh UI
