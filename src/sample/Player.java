@@ -145,12 +145,8 @@ public class Player {
         }
     }
 
-    public void endCurrentTurn() {
-        // TODO
-    }
-
     public void triggerHPLossPerTurn() {
-        // TODO
+        this.loseHP(++this.hpLostPerTurn);
     }
 
     public void useHeroSpell() {

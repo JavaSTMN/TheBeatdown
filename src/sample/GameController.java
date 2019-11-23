@@ -59,6 +59,12 @@ public class GameController implements Initializable {
     @FXML
     private Label player2DeckSize;
 
+    @FXML
+    private Label player1Health;
+
+    @FXML
+    private Label player2Health;
+
     /**
      * Inits the game visuals
      * @param location
@@ -99,21 +105,32 @@ public class GameController implements Initializable {
      * Renders all that is related to the heroes
      */
     public void renderHeroes() {
-        initHeroesPortraits();
+        renderHeroesPortraits();
+        renderHeroesHealth();
         // TODO: Render rest of heroes stuff
     }
 
     /**
      * Inits portraits of both heroes.
      */
-    private void initHeroesPortraits() {
-        // player1
-        Image imgP1 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer1().getImage()).toURI().toString());
-        player1Portrait.setImage(imgP1);
+    private void renderHeroesPortraits() {
+        if (this.player1Portrait.getImage() == null || this.player2Portrait.getImage() == null) {
+            // player1
+            Image imgP1 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer1().getImage()).toURI().toString());
+            player1Portrait.setImage(imgP1);
 
-        // player2
-        Image imgP2 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer2().getImage()).toURI().toString());
-        player2Portrait.setImage(imgP2);
+            // player2
+            Image imgP2 = new Image(Utils.getFileFromResources(GameManager.getInstance().getPlayer2().getImage()).toURI().toString());
+            player2Portrait.setImage(imgP2);
+        }
+    }
+
+    /**
+     * Renders heroes health points.
+     */
+    private void renderHeroesHealth() {
+        this.player1Health.setText(Integer.toString(GameManager.getInstance().getPlayer1().getCurrentHP()));
+        this.player2Health.setText(Integer.toString(GameManager.getInstance().getPlayer2().getCurrentHP()));
     }
 
     /** HANDS **/

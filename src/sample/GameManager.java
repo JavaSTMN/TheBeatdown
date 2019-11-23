@@ -173,7 +173,6 @@ public class GameManager {
             }
         } else {
             // trigger hp loss
-            p.setHpLostPerTurn(p.getHpLostPerTurn() + 1);
             p.triggerHPLossPerTurn();
         }
 
