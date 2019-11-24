@@ -180,7 +180,9 @@ public class GameManager {
         this.currentTurnPlayer = p;
 
         // refresh graphics
-        if (GameController.getInstance() != null)
+        if (GameController.getInstance() != null) {
             GameController.getInstance().renderEverything();
+            GameController.getInstance().enableHeroesSpells();
+        }
     }
 }

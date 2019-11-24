@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
  */
 public class GameController implements Initializable {
     public static GameController instance;
+
     public static GameController getInstance() {
         return instance;
     }
@@ -64,6 +65,24 @@ public class GameController implements Initializable {
 
     @FXML
     private Label player2Health;
+
+    @FXML
+    private ImageView player1HeroSpellImg;
+
+    @FXML
+    private ImageView player2HeroSpellImg;
+
+    @FXML
+    private Label player1HeroSpellManaCost;
+
+    @FXML
+    private Label player2HeroSpellManaCost;
+
+    @FXML
+    private Button player1HeroSpellBtn;
+
+    @FXML
+    private Button player2HeroSpellBtn;
 
     private ISpell spellToCast;
 
@@ -109,7 +128,7 @@ public class GameController implements Initializable {
     public void renderHeroes() {
         renderHeroesPortraits();
         renderHeroesHealth();
-        // TODO: Render rest of heroes stuff
+        renderHeroesSpells();
     }
 
     /**
@@ -133,6 +152,61 @@ public class GameController implements Initializable {
     private void renderHeroesHealth() {
         this.player1Health.setText(Integer.toString(GameManager.getInstance().getPlayer1().getCurrentHP()));
         this.player2Health.setText(Integer.toString(GameManager.getInstance().getPlayer2().getCurrentHP()));
+    }
+
+    /**
+     * Render both heroes specific spells
+     */
+    private void renderHeroesSpells() {
+        Spell p1HeroSpell = GameManager.getInstance().getPlayer1().getHeroSpell();
+        Spell p2HeroSpell = GameManager.getInstance().getPlayer2().getHeroSpell();
+        if (this.player1HeroSpellImg.getImage() == null || this.player2HeroSpellImg.getImage() == null) {
+            this.player1HeroSpellImg.setImage(new Image(Utils.getFileFromResources(p1HeroSpell.getImage()).toURI().toString()));
+            this.player2HeroSpellImg.setImage(new Image(Utils.getFileFromResources(p2HeroSpell.getImage()).toURI().toString()));
+        }
+        this.player1HeroSpellManaCost.setText(Integer.toString(p1HeroSpell.getCost()));
+        this.player2HeroSpellManaCost.setText(Integer.toString(p2HeroSpell.getCost()));
+    }
+
+    @FXML
+    protected void usePlayer1HeroSpell(ActionEvent event) {
+        useHeroSpell(GameManager.getInstance().getPlayer1(), GameManager.getInstance().getPlayer2());
+    }
+
+    @FXML
+    protected void usePlayer2HeroSpell(ActionEvent event) {
+        useHeroSpell(GameManager.getInstance().getPlayer2(), GameManager.getInstance().getPlayer1());
+    }
+
+    private void useHeroSpell(Player caster, Player opponent) {
+        // determine current player and other player
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+
+        // check if it's player's allowed to use the spell and if he has enough mana
+        if (caster == currentTurnPlayer && currentTurnPlayer.getManaReserve().hasEnoughMana(currentTurnPlayer.getHeroSpell().getCost()) && currentTurnPlayer.isHeroSpellAvailable()) {
+            ISpell is = (ISpell) currentTurnPlayer.getHeroSpell();
+            if (!currentTurnPlayer.getHeroSpell().isTargettedSpell) {
+                is.useSpell(currentTurnPlayer, opponent); // use the right spell
+            } else {
+                GameController.getInstance().setSpellToCast(is);
+            }
+
+            // refresh UI
+            GameController.getInstance().renderEverything();
+        }
+    }
+
+    public void disableHeroSpell(Player p) {
+        if (p == GameManager.getInstance().getPlayer1()) {
+            this.player1HeroSpellBtn.setDisable(true);
+        } else {
+            this.player2HeroSpellBtn.setDisable(true);
+        }
+    }
+
+    public void enableHeroesSpells() {
+        this.player1HeroSpellBtn.setDisable(false);
+        this.player2HeroSpellBtn.setDisable(false);
     }
 
     /** HANDS **/

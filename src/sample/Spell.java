@@ -29,10 +29,17 @@ public abstract class Spell extends Card implements ISpell {
     }
 
     public void useSpell(Player caster, Object receiver) {
+        // check if it's a hero spell
+        if (this == caster.getHeroSpell()) {
+            // disable hero spell
+            caster.setHeroSpellAvailable(false);
+            GameController.getInstance().disableHeroSpell(caster);
+        } else {
+            // remove card from hand
+            caster.getHand().removeCard(this);
+        }
+
         // remove cost from current mana
         caster.getManaReserve().decreaseMana(this.getCost());
-
-        // remove card from hand
-        caster.getHand().removeCard(this);
     }
 }

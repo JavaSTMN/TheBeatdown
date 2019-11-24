@@ -35,6 +35,27 @@
                         </Label>
                      </children>
                   </StackPane>
+                      <Button fx:id="player2HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer2HeroSpell" prefHeight="77.0" prefWidth="77.0">
+                         <graphic>
+                            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="77.0" prefWidth="97.0">
+                               <children>
+                                  <ImageView fx:id="player2HeroSpellImg" fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" />
+                               </children>
+                               <StackPane alignment="TOP_LEFT" prefHeight="0.0" prefWidth="97.0">
+                                  <children>
+                                     <Circle fill="DODGERBLUE" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                                     <Label fx:id="player2HeroSpellManaCost" alignment="CENTER" prefHeight="17.0" prefWidth="17.0" text="50" textAlignment="CENTER">
+                                        <padding>
+                                           <Insets left="2.0" />
+                                        </padding></Label>
+                                  </children>
+                                  <VBox.margin>
+                                     <Insets bottom="1.5" left="3.0" />
+                                  </VBox.margin>
+                               </StackPane>
+                            </StackPane>
+                         </graphic>
+                      </Button>
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                       <VBox prefHeight="100.0" prefWidth="32.0">
                          <children>
@@ -98,6 +119,27 @@
                         </Label>
                      </children>
                   </StackPane>
+                  <Button fx:id="player1HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer1HeroSpell" prefHeight="77.0" prefWidth="77.0">
+                     <graphic>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="77.0" prefWidth="97.0">
+                           <children>
+                              <ImageView fx:id="player1HeroSpellImg" fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                           <StackPane alignment="TOP_LEFT" prefHeight="0.0" prefWidth="97.0">
+                              <children>
+                                 <Circle fill="DODGERBLUE" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                                 <Label fx:id="player1HeroSpellManaCost" alignment="CENTER" prefHeight="17.0" prefWidth="17.0" text="50" textAlignment="CENTER">
+                                    <padding>
+                                       <Insets left="2.0" />
+                                    </padding></Label>
+                              </children>
+                              <VBox.margin>
+                                 <Insets bottom="1.5" left="3.0" />
+                              </VBox.margin>
+                           </StackPane>
+                        </StackPane>
+                     </graphic>
+                  </Button>
                   <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                   <VBox prefHeight="100.0" prefWidth="32.0">
                      <children>
