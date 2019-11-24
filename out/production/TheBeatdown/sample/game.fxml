@@ -58,6 +58,25 @@
                                   <Insets bottom="1.5" left="3.0" />
                                </HBox.margin>
                             </StackPane>
+                            <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                               <children>
+                                  <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                                  <Label fx:id="player2Mana" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0/0">
+                                     <HBox.margin>
+                                        <Insets right="5.0" />
+                                     </HBox.margin>
+                                     <font>
+                                        <Font size="18.0" />
+                                     </font>
+                                  </Label>
+                               </children>
+                               <VBox.margin>
+                                  <Insets bottom="1.5" left="3.0" />
+                               </VBox.margin>
+                               <HBox.margin>
+                                  <Insets bottom="1.5" left="3.0" />
+                               </HBox.margin>
+                            </StackPane>
                          </children>
                       </VBox>
                    </children>
@@ -106,6 +125,25 @@
                            <children>
                               <Circle fill="#ff4a4a" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                               <Label fx:id="player1Health" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="29">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </VBox.margin>
+                           <HBox.margin>
+                              <Insets bottom="1.5" left="3.0" />
+                           </HBox.margin>
+                        </StackPane>
+                        <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label fx:id="player1Mana" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0/0">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>

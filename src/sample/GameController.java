@@ -65,6 +65,13 @@ public class GameController implements Initializable {
     @FXML
     private Label player2Health;
 
+    @FXML
+    private Label player1Mana;
+
+    @FXML
+    private Label player2Mana;
+
+
     /**
      * Inits the game visuals
      * @param location
@@ -93,7 +100,7 @@ public class GameController implements Initializable {
 
     public void renderEverything() {
         renderHeroes();
-        // TODO: Render mana reserves
+        renderHeroesManaReserve();
         renderHands();
         renderDecks();
         renderBoards();
@@ -132,7 +139,22 @@ public class GameController implements Initializable {
         this.player1Health.setText(Integer.toString(GameManager.getInstance().getPlayer1().getCurrentHP()));
         this.player2Health.setText(Integer.toString(GameManager.getInstance().getPlayer2().getCurrentHP()));
     }
+    /**
+     * Renders heroes Mana Reserve.
+     */
+    private void renderHeroesManaReserve(){
+        this.player1Mana.setText(getHeroesMana(GameManager.getInstance().getPlayer1()));
+        this.player2Mana.setText(getHeroesMana(GameManager.getInstance().getPlayer2()));
+    }
 
+    private String getHeroesMana(Player p){
+        String mana ="";
+        int max = p.getManaReserve().getMaxMana();
+        int current = p.getManaReserve().getCurrentMana();
+
+        mana = current + "/" + max;
+        return (mana);
+    }
     /** HANDS **/
 
     /**
