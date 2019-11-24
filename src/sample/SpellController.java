@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
-
 /**
  * Controller lié au fichier à une carte FXML. Fonctionne sur le même principe que le GameController.
  */
@@ -51,9 +49,11 @@ public class SpellController {
         // check if it's player's allowed to use the spell and if he has enough mana
         if (this.owner == currentTurnPlayer && currentTurnPlayer.getManaReserve().hasEnoughMana(this.spell.getCost())) {
             ISpell is = (ISpell) this.spell;
-            System.out.println("Before, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
-            is.useSpell(currentTurnPlayer, otherPlayer); // use the right spell
-            System.out.println("After, Mana: " + currentTurnPlayer.getManaReserve().getCurrentMana() + " / " + currentTurnPlayer.getManaReserve().getMaxMana());
+            if (!this.spell.isTargettedSpell) {
+                is.useSpell(currentTurnPlayer, otherPlayer); // use the right spell
+            } else {
+                GameController.getInstance().setSpellToCast(is);
+            }
 
             // refresh UI
             GameController.getInstance().renderEverything();

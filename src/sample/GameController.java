@@ -65,6 +65,8 @@ public class GameController implements Initializable {
     @FXML
     private Label player2Health;
 
+    private ISpell spellToCast;
+
     /**
      * Inits the game visuals
      * @param location
@@ -183,6 +185,7 @@ public class GameController implements Initializable {
                 loader.setLocation(Main.class.getResource("minion.fxml"));
                 cardUI = (Button) loader.load();
                 MinionController cc = (MinionController) loader.getController();
+                cc.setOwner(owner);
                 cc.renderCard((Minion) cardToRender);
             } else { // if spell card
                 // load fmxl of the card
@@ -254,5 +257,13 @@ public class GameController implements Initializable {
         } else {
             this.player2DeckSize.setText(Integer.toString(deckSize));
         }
+    }
+
+    public void setSpellToCast(ISpell spell) {
+        this.spellToCast = spell;
+    }
+
+    public ISpell getSpellToCast() {
+        return this.spellToCast;
     }
 }

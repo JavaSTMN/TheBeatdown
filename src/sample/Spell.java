@@ -11,6 +11,8 @@ public abstract class Spell extends Card implements ISpell {
 
     private int actionParam;
 
+    protected boolean isTargettedSpell;
+
     public Spell() {}
 
     public Spell(String name, String description, int cost, String image, int actionParam) {
