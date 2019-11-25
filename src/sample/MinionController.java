@@ -78,6 +78,7 @@ public class MinionController {
                 if (minionWantsToAttack != null) {
                     if (otherPlayer.getBoard().contains(this.minion)) {
                         minionWantsToAttack.attack(this.minion);
+                        GameController.getInstance().setMinionWaitingToAttack(null);
                     } else {
                         GameController.getInstance().setMinionWaitingToAttack(null);
                     }
