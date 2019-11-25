@@ -66,16 +66,19 @@ public class Hand {
         this.player = player;
     }
 
-    public void playCard(Card card) {
+    public void playCard(Card card, Player player) {
+        int manaAmount = card.getCost();
         if (card instanceof Minion) {
-            this.placeMinionOnBoard((Minion)card);
+            this.placeMinionOnBoard((Minion)card, player);
         } else {
             this.useSpell((Spell)card);
         }
+        ManaReserve playerManaReserve = player.getManaReserve();
+        playerManaReserve.setCurrentMana(playerManaReserve.getCurrentMana() - manaAmount);
     }
 
-    public void placeMinionOnBoard(Minion minion) {
-        ArrayList<Minion> board = this.getPlayer().getBoard();
+    public void placeMinionOnBoard(Minion minion, Player player) {
+        ArrayList<Minion> board = player.getBoard();
         if (this.getCards().contains(minion)) {
             board.add(minion);
             this.removeCard(minion);

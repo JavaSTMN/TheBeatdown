@@ -51,6 +51,7 @@ public class MinionController {
     protected void handleMinionClick(ActionEvent event) {
         // determine current player and other player
         Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+        int currentTurnPlayerCurrentMana = currentTurnPlayer.getManaReserve().getCurrentMana();
         Player otherPlayer;
         if (currentTurnPlayer == GameManager.getInstance().getPlayer1()) {
             otherPlayer = GameManager.getInstance().getPlayer2();
@@ -68,7 +69,17 @@ public class MinionController {
                 GameController.getInstance().setSpellToCast(null);
             }
         } else {
-            // TODO: Handle minion click
+            Hand hand = currentTurnPlayer.getHand();
+            if (hand.getCards().contains(this.minion) && currentTurnPlayerCurrentMana >= this.minion.getCost()) {
+                hand.placeMinionOnBoard(this.minion, currentTurnPlayer);
+                currentTurnPlayer.getManaReserve().setCurrentMana(currentTurnPlayerCurrentMana - this.minion.getCost());
+                GameController.getInstance().renderBoard(currentTurnPlayer);
+                GameController.getInstance().renderHand(currentTurnPlayer);
+            } else {
+                Minion targetedMinion = new Minion();
+
+                GameController.getInstance().renderEverything();
+            }
         }
 
         // refresh UI

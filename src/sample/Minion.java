@@ -76,6 +76,14 @@ public class Minion extends Card {
         player.loseHP(getDmg());
     }
 
+    public void lauchAttack(Object receiver) {
+        if (receiver instanceof Minion) {
+            this.attack((Minion) receiver);
+        } else if (receiver instanceof Player) {
+            this.attack((Player) receiver);
+        }
+    }
+
     public void die() {
         ArrayList<Minion> player1Board = GameManager.getInstance().getPlayer1().getBoard();
         ArrayList<Minion> player2Board = GameManager.getInstance().getPlayer2().getBoard();

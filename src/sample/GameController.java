@@ -60,6 +60,8 @@ public class GameController implements Initializable {
     @FXML
     private Label player2DeckSize;
 
+    private Minion minionTargeted;
+
     @FXML
     private Label player1Health;
 
@@ -71,7 +73,7 @@ public class GameController implements Initializable {
 
     @FXML
     private ImageView player2HeroSpellImg;
-    
+
     @FXML
     private Label player1Mana;
 
@@ -159,8 +161,8 @@ public class GameController implements Initializable {
         this.player1Health.setText(Integer.toString(GameManager.getInstance().getPlayer1().getCurrentHP()));
         this.player2Health.setText(Integer.toString(GameManager.getInstance().getPlayer2().getCurrentHP()));
     }
-    
-     /**
+
+    /**
      * Renders heroes Mana Reserve.
      */
     private void renderHeroesManaReserve(){
