@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import sun.awt.EventListenerAggregate;
 
 import java.io.IOException;
 import java.net.URL;
@@ -131,6 +132,15 @@ public class GameController implements Initializable {
     }
 
     /** HEROES **/
+    @FXML
+    protected void handlePlayer1Click(ActionEvent event) {
+        System.out.println("clickedPlayer1");
+    }
+
+    @FXML
+    protected void handlePlayer2Click(ActionEvent event) {
+        System.out.println("clickedPlayer2");
+    }
 
     /**
      * Renders all that is related to the heroes

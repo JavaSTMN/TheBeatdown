@@ -56,7 +56,12 @@
                             </StackPane>
                          </graphic>
                       </Button>
-                       <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+
+                      <Button mnemonicParsing="false" onAction="#handlePlayer2Click" prefHeight="173.0" prefWidth="101.0">
+                         <graphic>
+                            <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="72.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" />
+                         </graphic>
+                      </Button>
                       <VBox prefHeight="100.0" prefWidth="32.0">
                          <children>
                             <StackPane prefHeight="58.0" prefWidth="30.0">
@@ -163,7 +168,11 @@
                         </StackPane>
                      </graphic>
                   </Button>
-                  <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button mnemonicParsing="false" onAction="#handlePlayer1Click" prefHeight="173.0" prefWidth="101.0">
+                     <graphic>
+                        <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="73.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
                   <VBox prefHeight="100.0" prefWidth="32.0">
                      <children>
                         <StackPane prefHeight="58.0" prefWidth="30.0">
