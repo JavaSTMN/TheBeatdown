@@ -3,7 +3,6 @@ package sample;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
 
 public class GameManager {
 
@@ -111,7 +110,8 @@ public class GameManager {
             if (i < uniqueCards.size()) {
                 cards.push(uniqueCards.get(i));
             } else { // fill the rest with random picks from the unique cards list
-                cards.push(uniqueCards.get((int)(Math.random() * uniqueCards.size())));
+                Card randomCard = uniqueCards.get((int)(Math.random() * uniqueCards.size()));
+                cards.push(randomCard);
             }
         }
 

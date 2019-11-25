@@ -19,6 +19,13 @@ public class Minion extends Card {
         super();
     }
 
+    public Minion(Minion minion) {
+        super(minion);
+        this.dmg = minion.getDmg();
+        this.currentHP = minion.getMaxHP();
+        this.maxHP = minion.getMaxHP();
+    }
+
     public int getDmg() {
         return dmg;
     }

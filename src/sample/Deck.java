@@ -9,7 +9,23 @@ public class Deck {
 
     public Deck(int maxDeckSize, ArrayDeque<Card> cards) {
         this.maxDeckSize = maxDeckSize;
-        this.cards = cards;
+        this.cards = new ArrayDeque<>();
+
+        int s = cards.size();
+        for (int i = 0; i < s; i++) {
+            Card poppedCard  = cards.pop();
+            if (poppedCard instanceof Minion) {
+                this.cards.push(new Minion((Minion) poppedCard));
+            } else {
+                Spell spell = (Spell) poppedCard;
+                try {
+                    this.cards.push((Spell)spell.clone());
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         shuffle();
     }
 
