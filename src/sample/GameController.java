@@ -59,6 +59,8 @@ public class GameController implements Initializable {
     @FXML
     private Label player2DeckSize;
 
+    private Minion minionTargeted;
+
     /**
      * Inits the game visuals
      * @param location
