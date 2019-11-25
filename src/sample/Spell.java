@@ -1,6 +1,6 @@
 package sample;
 
-public abstract class Spell extends Card implements ISpell {
+public abstract class Spell extends Card implements ISpell, Cloneable {
 
     public enum SpellType {
         RANDOM_SPLITTED_DMG,
@@ -12,6 +12,10 @@ public abstract class Spell extends Card implements ISpell {
     private int actionParam;
 
     protected boolean isTargettedSpell;
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
 
     public Spell() {}
 
