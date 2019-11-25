@@ -20,8 +20,8 @@ public class Main extends Application {
         this.primaryStage.show();
 
         // Tests displaying stuff on board
-        GameManager.getInstance().getPlayer1().getBoard().add((Minion)GameManager.getInstance().getPlayer1().getHand().getCards().get(0));
-        GameController.getInstance().renderBoards();
+        //GameManager.getInstance().getPlayer1().getBoard().add((Minion)GameManager.getInstance().getPlayer1().getHand().getCards().get(0));
+        //GameController.getInstance().renderBoards();
     }
 
     public static void main(String[] args) {
