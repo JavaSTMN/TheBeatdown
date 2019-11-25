@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class Minion extends Card {
 
     private int dmg;
@@ -52,10 +54,11 @@ public class Minion extends Card {
     }
 
     public void loseHP(int amount) {
-        int current = getCurrentHP();
-        if(current-amount <= 0) {
-            setCurrentHP(0);
+        if(this.currentHP - amount <= 0) {
+            this.currentHP = 0;
             die();
+        } else {
+            this.currentHP -= amount;
         }
     }
 
@@ -74,6 +77,12 @@ public class Minion extends Card {
     }
 
     public void die() {
-        System.out.println("Le minion est mort");
+        ArrayList<Minion> player1Board = GameManager.getInstance().getPlayer1().getBoard();
+        ArrayList<Minion> player2Board = GameManager.getInstance().getPlayer2().getBoard();
+        if (player1Board.contains(this)) {
+            player1Board.remove(this);
+        } else if (player2Board.contains(this)) {
+            player2Board.remove(this);
+        }
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="140.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SpellController">
+<Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSpellUse" prefHeight="140.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SpellController">
    <graphic>
       <AnchorPane prefHeight="20000.0" prefWidth="20000.0">
          <children>

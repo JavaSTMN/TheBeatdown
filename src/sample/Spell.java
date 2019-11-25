@@ -1,6 +1,6 @@
 package sample;
 
-public abstract class Spell extends Card {
+public abstract class Spell extends Card implements ISpell {
 
     public enum SpellType {
         RANDOM_SPLITTED_DMG,
@@ -10,6 +10,8 @@ public abstract class Spell extends Card {
     }
 
     private int actionParam;
+
+    protected boolean isTargettedSpell;
 
     public Spell() {}
 
@@ -26,5 +28,18 @@ public abstract class Spell extends Card {
         this.actionParam = actionParam;
     }
 
-    public void use() {}
+    public void useSpell(Player caster, Object receiver) {
+        // check if it's a hero spell
+        if (this == caster.getHeroSpell()) {
+            // disable hero spell
+            caster.setHeroSpellAvailable(false);
+            GameController.getInstance().disableHeroSpell(caster);
+        } else {
+            // remove card from hand
+            caster.getHand().removeCard(this);
+        }
+
+        // remove cost from current mana
+        caster.getManaReserve().decreaseMana(this.getCost());
+    }
 }

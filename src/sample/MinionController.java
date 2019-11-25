@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,11 +33,49 @@ public class MinionController {
     @FXML
     private Label health;
 
+    private Minion minion;
+
+    private Player owner;
+
     public void renderCard(Minion m) {
         this.manaCost.setText(Integer.toString(m.getCost()));
         this.portrait.setImage(new Image(Utils.getFileFromResources(m.getImage()).toURI().toString()));
         this.name.setText(m.getName());
         this.atk.setText(Integer.toString(m.getDmg()));
         this.health.setText(Integer.toString(m.getCurrentHP()));
+
+        this.minion = m;
+    }
+
+    @FXML
+    protected void handleMinionClick(ActionEvent event) {
+        // determine current player and other player
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+        Player otherPlayer;
+        if (currentTurnPlayer == GameManager.getInstance().getPlayer1()) {
+            otherPlayer = GameManager.getInstance().getPlayer2();
+        } else {
+            otherPlayer = GameManager.getInstance().getPlayer1();
+        }
+
+        // if we're trying to cast a spell
+        if (GameController.getInstance().getSpellToCast() != null) {
+            // if this minion is on a board
+            if (GameManager.getInstance().getPlayer1().getBoard().contains(this.minion) || GameManager.getInstance().getPlayer2().getBoard().contains(this.minion)) {
+                // cast the spell on this minion
+                GameController.getInstance().getSpellToCast().useSpell(currentTurnPlayer, this.minion);
+            } else {
+                GameController.getInstance().setSpellToCast(null);
+            }
+        } else {
+            // TODO: Handle minion click
+        }
+
+        // refresh UI
+        GameController.getInstance().renderEverything();
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }

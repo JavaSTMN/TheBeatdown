@@ -43,12 +43,12 @@ public class Hand {
         this.cards = cards;
     }
 
-    public void addCard(Card c) {
-        this.cards.add(c);
-    }
-
     public void addCards(ArrayList<Card> cs) {
-        this.cards.addAll(cs);
+        for (int i = 0; i < cs.size(); i++) {
+            if (this.cards.size() + 1 <= this.maxHandSize) {
+                this.cards.add(cs.get(i));
+            }
+        }
     }
 
     public Hand removeCard(Card c) {
@@ -83,6 +83,6 @@ public class Hand {
     }
 
     public void useSpell(Spell spell) {
-        spell.use();
+        //spell.use();
     }
 }
