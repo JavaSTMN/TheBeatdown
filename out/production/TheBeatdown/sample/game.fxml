@@ -59,8 +59,7 @@
                        <ImageView id="player2Portrait" fx:id="player2Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                       <VBox prefHeight="100.0" prefWidth="32.0">
                          <children>
-                            <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="40.0" prefWidth="24.0" visible="false" />
-                            <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                            <StackPane prefHeight="58.0" prefWidth="30.0">
                                <children>
                                   <Circle fill="#ff4a4a" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                                   <Label fx:id="player2Health" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="29">
@@ -79,7 +78,7 @@
                                   <Insets bottom="1.5" left="3.0" />
                                </HBox.margin>
                             </StackPane>
-                            <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                            <StackPane prefHeight="58.0" prefWidth="30.0">
                                <children>
                                   <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                                   <Label fx:id="player2Mana" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0/0">
@@ -100,6 +99,11 @@
                             </StackPane>
                          </children>
                       </VBox>
+                      <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="65.0" prefWidth="43.0" visible="false">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ProgressIndicator>
                    </children>
                </HBox>
                <HBox fx:id="player2Board" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" styleClass="board" stylesheets="@game.css" />
@@ -162,8 +166,7 @@
                   <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                   <VBox prefHeight="100.0" prefWidth="32.0">
                      <children>
-                        <ProgressIndicator fx:id="player1TurnIndicator" prefHeight="40.0" prefWidth="24.0" />
-                        <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                        <StackPane prefHeight="58.0" prefWidth="30.0">
                            <children>
                               <Circle fill="#ff4a4a" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                               <Label fx:id="player1Health" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="29">
@@ -182,7 +185,7 @@
                               <Insets bottom="1.5" left="3.0" />
                            </HBox.margin>
                         </StackPane>
-                        <StackPane alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="30.0">
+                        <StackPane prefHeight="58.0" prefWidth="30.0">
                            <children>
                               <Circle fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
                               <Label fx:id="player1Mana" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="30.0" text="0/0">
@@ -203,6 +206,11 @@
                         </StackPane>
                      </children>
                   </VBox>
+                  <ProgressIndicator fx:id="player1TurnIndicator" prefHeight="65.0" prefWidth="43.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ProgressIndicator>
                </children></HBox>
             <HBox fx:id="player1Hand" alignment="CENTER" minHeight="128.0" prefHeight="10000.0" prefWidth="10000.0" spacing="15.0" />
          </children></VBox>
