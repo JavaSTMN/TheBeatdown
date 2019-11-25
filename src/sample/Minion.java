@@ -19,6 +19,13 @@ public class Minion extends Card {
         super();
     }
 
+    public Minion(Minion minion) {
+        super(minion);
+        this.dmg = minion.getDmg();
+        this.currentHP = minion.getMaxHP();
+        this.maxHP = minion.getMaxHP();
+    }
+
     public int getDmg() {
         return dmg;
     }
@@ -74,14 +81,6 @@ public class Minion extends Card {
 
     public void attack(Player player) {
         player.loseHP(getDmg());
-    }
-
-    public void lauchAttack(Object receiver) {
-        if (receiver instanceof Minion) {
-            this.attack((Minion) receiver);
-        } else if (receiver instanceof Player) {
-            this.attack((Player) receiver);
-        }
     }
 
     public void die() {

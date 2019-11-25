@@ -16,6 +16,13 @@ public abstract class Card {
         this.image = image;
     }
 
+    public Card(Card card) {
+        this.name = card.getName();
+        this.description = card.getDescription();
+        this.cost = card.getCost();
+        this.image = card.getImage();
+    }
+
     public String getName() {
         return name;
     }

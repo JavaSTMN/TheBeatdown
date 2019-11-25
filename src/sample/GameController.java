@@ -94,6 +94,8 @@ public class GameController implements Initializable {
 
     private ISpell spellToCast;
 
+    private Minion minionWaitingToAttack;
+
     /**
      * Inits the game visuals
      * @param location
@@ -364,5 +366,13 @@ public class GameController implements Initializable {
 
     public ISpell getSpellToCast() {
         return this.spellToCast;
+    }
+
+    public Minion getMinionWaitingToAttack() {
+        return minionWaitingToAttack;
+    }
+
+    public void setMinionWaitingToAttack(Minion minionWaitingToAttack) {
+        this.minionWaitingToAttack = minionWaitingToAttack;
     }
 }

@@ -73,12 +73,17 @@ public class MinionController {
             if (hand.getCards().contains(this.minion) && currentTurnPlayerCurrentMana >= this.minion.getCost()) {
                 hand.placeMinionOnBoard(this.minion, currentTurnPlayer);
                 currentTurnPlayer.getManaReserve().setCurrentMana(currentTurnPlayerCurrentMana - this.minion.getCost());
-                GameController.getInstance().renderBoard(currentTurnPlayer);
-                GameController.getInstance().renderHand(currentTurnPlayer);
             } else {
-                Minion targetedMinion = new Minion();
-
-                GameController.getInstance().renderEverything();
+                Minion minionWantsToAttack = GameController.getInstance().getMinionWaitingToAttack();
+                if (minionWantsToAttack != null) {
+                    if (otherPlayer.getBoard().contains(this.minion)) {
+                        minionWantsToAttack.attack(this.minion);
+                    } else {
+                        GameController.getInstance().setMinionWaitingToAttack(null);
+                    }
+                } else {
+                    GameController.getInstance().setMinionWaitingToAttack(this.minion);
+                }
             }
         }
 
