@@ -9,10 +9,10 @@ public class SpellPickCard extends Spell implements ISpell {
     }
 
     public void useSpell(Player caster, Object receiver) {
+        super.useSpell(caster, receiver);
+
         Deck deck = caster.getDeck();
         ArrayList<Card> cards = deck.pickCardsFromDeck(super.getActionParam());
         caster.getHand().addCards(cards);
-
-        super.useSpell(caster, receiver);
     }
 }
