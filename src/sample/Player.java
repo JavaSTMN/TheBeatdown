@@ -140,6 +140,7 @@ public class Player {
         int current = getCurrentHP();
         if (current - amount < 0) {
             this.setCurrentHP(0);
+            die();
         } else {
             this.setCurrentHP(current - amount);
         }
@@ -162,6 +163,6 @@ public class Player {
     }
 
     public void die() {
-        System.out.println("Le joueur est mort");
+        GameController.getInstance().renderVictory(this);
     }
 }

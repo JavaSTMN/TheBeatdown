@@ -34,7 +34,7 @@ public class GameController implements Initializable {
     private VBox vboxVictory;
 
     @FXML
-    private Label textAnchor;
+    private Label labelVictory;
 
     @FXML
     private ImageView player1Portrait;
@@ -138,7 +138,8 @@ public class GameController implements Initializable {
         renderBoards();
     }
 
-    public void renderVictory(){
+    public void renderVictory(Player p){
+        labelVictory.setText(p.getName());
         vboxVictory.setVisible(true);
     }
 
