@@ -163,8 +163,9 @@ public class GameManager {
             mp.addManaMax(1);
         }
 
-        // refill available mana
-        mp.refillMana(mp.getMaxMana());
+        // refill current mana
+        GameManager.getInstance().getPlayer1().getManaReserve().refillMana();
+        GameManager.getInstance().getPlayer2().getManaReserve().refillMana();
 
         // check current deck size
         if(p.getDeck().getCards().size() > 0) {

@@ -54,6 +54,10 @@ public class ManaReserve {
         }
     }
 
+    public void refillMana() {
+        setCurrentMana(getMaxMana());
+    }
+
     public boolean hasEnoughMana(int amount) {
         int current = getCurrentMana();
         if(current>=amount)
