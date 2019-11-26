@@ -134,12 +134,30 @@ public class GameController implements Initializable {
     /** HEROES **/
     @FXML
     protected void handlePlayer1Click(ActionEvent event) {
-        System.out.println("clickedPlayer1");
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+        if (currentTurnPlayer != GameManager.getInstance().getPlayer1() && this.getMinionWaitingToAttack().isHasAlreadyAttack() == false) {
+            Player target = GameManager.getInstance().getPlayer1();
+            if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
+                this.getMinionWaitingToAttack().attack(target);
+                this.getMinionWaitingToAttack().setHasAlreadyAttack(true);
+                this.setMinionWaitingToAttack(null);
+            }
+        }
+        this.renderEverything();
     }
 
     @FXML
     protected void handlePlayer2Click(ActionEvent event) {
-        System.out.println("clickedPlayer2");
+        Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
+        if (currentTurnPlayer != GameManager.getInstance().getPlayer2() && this.getMinionWaitingToAttack().isHasAlreadyAttack() == false) {
+            Player target = GameManager.getInstance().getPlayer2();
+            if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
+                this.getMinionWaitingToAttack().attack(target);
+                this.getMinionWaitingToAttack().setHasAlreadyAttack(true);
+                this.setMinionWaitingToAttack(null);
+            }
+        }
+        this.renderEverything();
     }
 
     /**

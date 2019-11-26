@@ -7,12 +7,14 @@ public class Minion extends Card {
     private int dmg;
     private int currentHP;
     private int maxHP;
+    private boolean hasAlreadyAttack;
 
-    public Minion(String name, String description, int cost, String image, int dmg, int maxHP) {
+    public Minion(String name, String description, int cost, String image, int dmg, int maxHP, boolean hasAlreadyAttack) {
         super(name, description, cost, image);
         this.dmg = dmg;
         this.currentHP = maxHP;
         this.maxHP = maxHP;
+        this.hasAlreadyAttack = false;
     }
 
     public Minion() {
@@ -24,6 +26,7 @@ public class Minion extends Card {
         this.dmg = minion.getDmg();
         this.currentHP = minion.getMaxHP();
         this.maxHP = minion.getMaxHP();
+        this.hasAlreadyAttack = false;
     }
 
     public int getDmg() {
@@ -58,6 +61,14 @@ public class Minion extends Card {
         } else {
             setCurrentHP(current + amount);
         }
+    }
+
+    public boolean isHasAlreadyAttack() {
+        return hasAlreadyAttack;
+    }
+
+    public void setHasAlreadyAttack(boolean hasAlreadyAttack) {
+        this.hasAlreadyAttack = hasAlreadyAttack;
     }
 
     public void loseHP(int amount) {

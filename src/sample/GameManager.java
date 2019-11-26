@@ -157,6 +157,11 @@ public class GameManager {
         // enable hero power
         p.setHeroSpellAvailable(true);
 
+        ArrayList<Minion> board = p.getBoard();
+        for (int i = 0; i < board.size(); i++) {
+            board.get(i).setHasAlreadyAttack(false);
+        }
+
         ManaReserve mp = p.getManaReserve();
         // add max mana cristal
         if (mp.getMaxMana() + 1 <= mp.getMaxManaSlots()) {

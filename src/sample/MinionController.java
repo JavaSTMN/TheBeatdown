@@ -76,8 +76,9 @@ public class MinionController {
             } else {
                 Minion minionWantsToAttack = GameController.getInstance().getMinionWaitingToAttack();
                 if (minionWantsToAttack != null) {
-                    if (otherPlayer.getBoard().contains(this.minion)) {
+                    if (otherPlayer.getBoard().contains(this.minion) && minionWantsToAttack.isHasAlreadyAttack() == false) {
                         minionWantsToAttack.attack(this.minion);
+                        minionWantsToAttack.setHasAlreadyAttack(true);
                         GameController.getInstance().setMinionWaitingToAttack(null);
                     } else {
                         GameController.getInstance().setMinionWaitingToAttack(null);
@@ -87,7 +88,6 @@ public class MinionController {
                 }
             }
         }
-
         // refresh UI
         GameController.getInstance().renderEverything();
     }
