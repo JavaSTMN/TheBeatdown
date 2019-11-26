@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import sun.awt.EventListenerAggregate;
 
 import java.io.IOException;
 import java.net.URL;
@@ -142,7 +141,7 @@ public class GameController implements Initializable {
             this.spellToCast = null;
             renderEverything();
         }
-        else if (currentTurnPlayer != GameManager.getInstance().getPlayer1() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().isHasAlreadyAttack()) {
+        else if (currentTurnPlayer != GameManager.getInstance().getPlayer1() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().hasAlreadyAttacked()) {
             Player target = GameManager.getInstance().getPlayer1();
             if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
                 this.getMinionWaitingToAttack().attack(target);
@@ -162,7 +161,7 @@ public class GameController implements Initializable {
             this.spellToCast = null;
             renderEverything();
         }
-        else if (currentTurnPlayer != GameManager.getInstance().getPlayer2() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().isHasAlreadyAttack()) {
+        else if (currentTurnPlayer != GameManager.getInstance().getPlayer2() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().hasAlreadyAttacked()) {
             Player target = GameManager.getInstance().getPlayer2();
             if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
                 this.getMinionWaitingToAttack().attack(target);

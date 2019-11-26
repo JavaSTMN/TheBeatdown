@@ -157,10 +157,9 @@ public class GameManager {
         // enable hero power
         p.setHeroSpellAvailable(true);
 
-        ArrayList<Minion> board = p.getBoard();
-        for (int i = 0; i < board.size(); i++) {
-            board.get(i).setHasAlreadyAttack(false);
-        }
+        // set minion able to attack
+        setBoardMinionsReadyToAttack(GameManager.getInstance().getPlayer1());
+        setBoardMinionsReadyToAttack(GameManager.getInstance().getPlayer2());
 
         ManaReserve mp = p.getManaReserve();
         // add max mana cristal
@@ -191,6 +190,13 @@ public class GameManager {
         if (GameController.getInstance() != null) {
             GameController.getInstance().renderEverything();
             GameController.getInstance().enableHeroesSpells();
+        }
+    }
+
+    private void setBoardMinionsReadyToAttack(Player player) {
+        ArrayList<Minion> board = player.getBoard();
+        for (int i = 0; i < board.size(); i++) {
+            board.get(i).setHasAlreadyAttack(false);
         }
     }
 }

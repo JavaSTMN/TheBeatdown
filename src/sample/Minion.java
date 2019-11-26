@@ -63,7 +63,7 @@ public class Minion extends Card {
         }
     }
 
-    public boolean isHasAlreadyAttack() {
+    public boolean hasAlreadyAttacked() {
         return hasAlreadyAttack;
     }
 

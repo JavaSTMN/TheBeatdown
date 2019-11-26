@@ -2,22 +2,19 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Controller lié au fichier à une carte FXML. Fonctionne sur le même principe que le GameController.
  */
 public class MinionController {
+    @FXML
+    private Button minionCardBtn;
+
     @FXML
     private Label manaCost;
 
@@ -37,12 +34,29 @@ public class MinionController {
 
     private Player owner;
 
+    private Effect playableCardEffect;
+
     public void renderCard(Minion m) {
         this.manaCost.setText(Integer.toString(m.getCost()));
         this.portrait.setImage(new Image(Utils.getFileFromResources(m.getImage()).toURI().toString()));
         this.name.setText(m.getName());
         this.atk.setText(Integer.toString(m.getDmg()));
         this.health.setText(Integer.toString(m.getCurrentHP()));
+
+        if(this.minionCardBtn.getEffect() != null) {
+            playableCardEffect = this.minionCardBtn.getEffect();
+        }
+
+        // if minion on board and can't attack, disable the UI component
+        if (GameManager.getInstance().getPlayer1().getBoard().contains(m) || GameManager.getInstance().getPlayer2().getBoard().contains(m)) {
+            if (m.hasAlreadyAttacked()) {
+                this.minionCardBtn.setEffect(null);
+            } else {
+                this.minionCardBtn.setEffect(playableCardEffect);
+            }
+        } else {
+            this.minionCardBtn.setEffect(null);
+        }
 
         this.minion = m;
     }
@@ -76,7 +90,7 @@ public class MinionController {
             } else {
                 Minion minionWantsToAttack = GameController.getInstance().getMinionWaitingToAttack();
                 if (minionWantsToAttack != null) {
-                    if (otherPlayer.getBoard().contains(this.minion) && minionWantsToAttack.isHasAlreadyAttack() == false) {
+                    if (otherPlayer.getBoard().contains(this.minion) && minionWantsToAttack.hasAlreadyAttacked() == false) {
                         minionWantsToAttack.attack(this.minion);
                         minionWantsToAttack.setHasAlreadyAttack(true);
                         GameController.getInstance().setMinionWaitingToAttack(null);
