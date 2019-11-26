@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +30,12 @@ public class GameController implements Initializable {
     public static GameController getInstance() {
         return instance;
     }
+
+    @FXML
+    private VBox vboxVictory;
+
+    @FXML
+    private Label labelVictory;
 
     @FXML
     private ImageView player1Portrait;
@@ -92,6 +99,9 @@ public class GameController implements Initializable {
     @FXML
     private Button player2HeroSpellBtn;
 
+    @FXML
+    private VBox mainGamePanel;
+
     private ISpell spellToCast;
 
     private Player spellToCastCaster;
@@ -132,6 +142,27 @@ public class GameController implements Initializable {
         renderBoards();
     }
 
+    public void renderVictory(Player p){
+        if (p == GameManager.getInstance().getPlayer1()) {
+            labelVictory.setText(GameManager.getInstance().getPlayer2().getName() + "\nwins the battle!");
+        } else {
+            labelVictory.setText(GameManager.getInstance().getPlayer1().getName() + "\nwins the battle!");
+        }
+        mainGamePanel.setDisable(true);
+        vboxVictory.setVisible(true);
+    }
+
+    @FXML
+    protected void handleReplay(){
+        GameManager.getInstance().initGame();
+        mainGamePanel.setDisable(false);
+        vboxVictory.setVisible(false);
+    }
+
+    @FXML
+    protected void handleLeave(){
+        GameManager.getInstance().getPrimaryStage().close();
+    }
     /** HEROES **/
     @FXML
     protected void handlePlayer1Click(ActionEvent event) {

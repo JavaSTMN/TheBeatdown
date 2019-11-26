@@ -79,6 +79,8 @@ public class MinionController {
             if (GameManager.getInstance().getPlayer1().getBoard().contains(this.minion) || GameManager.getInstance().getPlayer2().getBoard().contains(this.minion)) {
                 // cast the spell on this minion
                 GameController.getInstance().getSpellToCast().useSpell(currentTurnPlayer, this.minion);
+                // refresh UI
+                GameController.getInstance().renderEverything();
             } else {
                 GameController.getInstance().setSpellToCast(null);
             }
@@ -87,6 +89,8 @@ public class MinionController {
             if (hand.getCards().contains(this.minion) && currentTurnPlayerCurrentMana >= this.minion.getCost()) {
                 hand.placeMinionOnBoard(this.minion, currentTurnPlayer);
                 currentTurnPlayer.getManaReserve().setCurrentMana(currentTurnPlayerCurrentMana - this.minion.getCost());
+                // refresh UI
+                GameController.getInstance().renderEverything();
             } else {
                 Minion minionWantsToAttack = GameController.getInstance().getMinionWaitingToAttack();
                 if (minionWantsToAttack != null) {
@@ -94,6 +98,8 @@ public class MinionController {
                         minionWantsToAttack.attack(this.minion);
                         minionWantsToAttack.setHasAlreadyAttack(true);
                         GameController.getInstance().setMinionWaitingToAttack(null);
+                        // refresh UI
+                        GameController.getInstance().renderEverything();
                     } else {
                         GameController.getInstance().setMinionWaitingToAttack(null);
                     }
@@ -102,8 +108,6 @@ public class MinionController {
                 }
             }
         }
-        // refresh UI
-        GameController.getInstance().renderEverything();
     }
 
     public void setOwner(Player owner) {

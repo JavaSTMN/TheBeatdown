@@ -24,7 +24,11 @@ public class ManaReserve {
     }
 
     public void setMaxMana(int maxMana) {
-        this.maxMana = maxMana;
+        if (this.maxMana > this.maxManaSlots) {
+            this.maxMana = this.maxManaSlots;
+        } else {
+            this.maxMana = maxMana;
+        }
     }
 
     public int getMaxManaSlots() {

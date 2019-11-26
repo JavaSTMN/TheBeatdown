@@ -18,7 +18,7 @@ public class Main extends Application {
         this.primaryStage.setScene(new Scene(root, 1400, 800));
         //primaryStage.setFullScreen(true);
         this.primaryStage.show();
-
+        GameManager.getInstance().setPrimaryStage(primaryStage);
         // Tests displaying stuff on board
         //GameManager.getInstance().getPlayer1().getBoard().add((Minion)GameManager.getInstance().getPlayer1().getHand().getCards().get(0));
         //GameController.getInstance().renderBoards();

@@ -7,7 +7,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" styleClass="background" stylesheets="@game.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
+   <children>
+      <VBox fx:id="mainGamePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1366.0" styleClass="background" stylesheets="@game.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.2-internal">
    <children>
        <VBox prefHeight="10000.0" prefWidth="10000.0" stylesheets="@game.css">
            <children>
@@ -231,3 +233,43 @@
          </children></VBox>
    </children>
 </VBox>
+      <VBox fx:id="vboxVictory" layoutX="550" layoutY="320" maxHeight="300" maxWidth="300" minHeight="100" minWidth="100" prefHeight="200.0" prefWidth="300.0" visible="false" xmlns="http://javafx.com/javafx/10.0.2-internal">
+         <children>
+            <StackPane>
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dc3d31" height="85.0" stroke="WHITE" strokeType="INSIDE" width="300.0" />
+                  <Label fx:id="labelVictory" alignment="CENTER" prefHeight="88.0" prefWidth="300.0" text="Victory player 1" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <HBox prefHeight="200" prefWidth="5">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleReplay" prefHeight="50.0" prefWidth="200.0">
+                     <graphic>
+                        <Label fx:id="labelReplay" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" text="Rejouer" textAlignment="CENTER" textFill="BLACK">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleLeave" prefHeight="50.0" prefWidth="200.0">
+                     <graphic>
+                        <Label fx:id="labelLeave" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" text="Quitter" textAlignment="CENTER" textFill="BLACK">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </graphic>
+                     <HBox.margin>
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
