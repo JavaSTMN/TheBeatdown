@@ -137,7 +137,12 @@ public class GameController implements Initializable {
     @FXML
     protected void handlePlayer1Click(ActionEvent event) {
         Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
-        if (currentTurnPlayer != GameManager.getInstance().getPlayer1() && this.getMinionWaitingToAttack().isHasAlreadyAttack() == false) {
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer1());
+            this.spellToCast = null;
+            renderEverything();
+        }
+        else if (currentTurnPlayer != GameManager.getInstance().getPlayer1() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().isHasAlreadyAttack()) {
             Player target = GameManager.getInstance().getPlayer1();
             if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
                 this.getMinionWaitingToAttack().attack(target);
@@ -146,17 +151,18 @@ public class GameController implements Initializable {
                 this.renderEverything();
             }
         }
-        if (this.spellToCast != null) {
-            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer1());
-            this.spellToCast = null;
-            renderEverything();
-        }
     }
 
     @FXML
     protected void handlePlayer2Click(ActionEvent event) {
         Player currentTurnPlayer = GameManager.getInstance().getCurrentTurnPlayer();
-        if (currentTurnPlayer != GameManager.getInstance().getPlayer2() && this.getMinionWaitingToAttack().isHasAlreadyAttack() == false) {
+
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer2());
+            this.spellToCast = null;
+            renderEverything();
+        }
+        else if (currentTurnPlayer != GameManager.getInstance().getPlayer2() && this.getMinionWaitingToAttack() != null && !this.getMinionWaitingToAttack().isHasAlreadyAttack()) {
             Player target = GameManager.getInstance().getPlayer2();
             if (currentTurnPlayer.getBoard().contains(this.getMinionWaitingToAttack())) {
                 this.getMinionWaitingToAttack().attack(target);
@@ -164,11 +170,6 @@ public class GameController implements Initializable {
                 this.setMinionWaitingToAttack(null);
                 this.renderEverything();
             }
-        }
-        if (this.spellToCast != null) {
-            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer2());
-            this.spellToCast = null;
-            renderEverything();
         }
     }
 
