@@ -167,14 +167,17 @@ public class GameManager {
         if (mp.getMaxMana() + 1 <= mp.getMaxManaSlots()) {
             mp.addManaMax(1);
         }
-        // refill available mana
-        mp.refillMana(mp.getMaxMana());
+
+        // refill current mana
+        GameManager.getInstance().getPlayer1().getManaReserve().refillMana();
+        GameManager.getInstance().getPlayer2().getManaReserve().refillMana();
 
         // check current deck size
         if(p.getDeck().getCards().size() > 0) {
             // pick a card if room in hand
+            ArrayList<Card> pickedCards = p.getDeck().pickCardsFromDeck(1);
             if (p.getHand().getCards().size() + 1 <= p.getHand().getMaxHandSize()) {
-                p.getHand().addCards(p.getDeck().pickCardsFromDeck(1));
+                p.getHand().addCards(pickedCards);
             }
         } else {
             // trigger hp loss

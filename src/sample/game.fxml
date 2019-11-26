@@ -35,9 +35,9 @@
                         </Label>
                      </children>
                   </StackPane>
-                      <Button fx:id="player2HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer2HeroSpell" prefHeight="77.0" prefWidth="77.0">
+                      <Button fx:id="player2HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer2HeroSpell" prefHeight="77.0" prefWidth="73.0">
                          <graphic>
-                            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="77.0" prefWidth="97.0">
+                            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="73.0">
                                <children>
                                   <ImageView fx:id="player2HeroSpellImg" fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" />
                                </children>
@@ -55,6 +55,9 @@
                                </StackPane>
                             </StackPane>
                          </graphic>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                       </Button>
 
                       <Button mnemonicParsing="false" onAction="#handlePlayer2Click" prefHeight="173.0" prefWidth="101.0">
@@ -106,7 +109,7 @@
                       </VBox>
                       <ProgressIndicator fx:id="player2TurnIndicator" prefHeight="65.0" prefWidth="43.0" visible="false">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="10.0" right="116.0" />
                      </HBox.margin>
                   </ProgressIndicator>
                    </children>
@@ -147,7 +150,7 @@
                         </Label>
                      </children>
                   </StackPane>
-                  <Button fx:id="player1HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer1HeroSpell" prefHeight="77.0" prefWidth="77.0">
+                  <Button fx:id="player1HeroSpellBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#usePlayer1HeroSpell" prefHeight="77.0" prefWidth="73.0">
                      <graphic>
                         <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="77.0" prefWidth="97.0">
                            <children>
@@ -167,10 +170,13 @@
                            </StackPane>
                         </StackPane>
                      </graphic>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#handlePlayer1Click" prefHeight="173.0" prefWidth="101.0">
                      <graphic>
-                        <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="73.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView id="player1Portrait" fx:id="player1Portrait" fitHeight="72.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
                   <VBox prefHeight="100.0" prefWidth="32.0">
@@ -217,7 +223,7 @@
                   </VBox>
                   <ProgressIndicator fx:id="player1TurnIndicator" prefHeight="65.0" prefWidth="43.0">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="10.0" right="116.0" />
                      </HBox.margin>
                   </ProgressIndicator>
                </children></HBox>
