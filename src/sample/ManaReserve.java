@@ -37,9 +37,9 @@ public class ManaReserve {
 
     public void addManaMax(int amount) {
         int manaMax = getMaxMana();
-        int slotsMax=getMaxManaSlots();
-        if((manaMax+amount)<slotsMax){
-            setMaxMana(manaMax+amount);
+        int slotsMax = getMaxManaSlots();
+        if((manaMax+amount) <= slotsMax){
+            setMaxMana(manaMax + amount);
         }
     }
 
