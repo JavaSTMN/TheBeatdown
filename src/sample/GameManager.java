@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.stage.Stage;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +15,7 @@ public class GameManager {
     private float maxTurnDuration = 60;
     private int maxDeckSize = 20;
     private int maxHandSize = 8;
+    private Stage primaryStage;
 
     public GameManager() throws Exception {
         if (this.instance == null) {
@@ -21,6 +24,10 @@ public class GameManager {
             throw new Exception("Cannot instantiate the game manager more than once.");
         }
     }
+
+    public void setPrimaryStage(Stage primaryStage) {this.primaryStage=primaryStage;}
+
+    public Stage getPrimaryStage(){return this.primaryStage;}
 
     public static GameManager getInstance() {
         return instance;

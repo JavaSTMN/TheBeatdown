@@ -7,11 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import sun.awt.EventListenerAggregate;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +29,12 @@ public class GameController implements Initializable {
     public static GameController getInstance() {
         return instance;
     }
+
+    @FXML
+    private VBox vboxVictory;
+
+    @FXML
+    private Label textAnchor;
 
     @FXML
     private ImageView player1Portrait;
@@ -133,6 +138,20 @@ public class GameController implements Initializable {
         renderBoards();
     }
 
+    public void renderVictory(){
+        vboxVictory.setVisible(true);
+    }
+
+    @FXML
+    protected void handleReplay(){
+        GameManager.getInstance().initGame();
+        vboxVictory.setVisible(false);
+    }
+
+    @FXML
+    protected void handleLeave(){
+        GameManager.getInstance().getPrimaryStage().close();
+    }
     /** HEROES **/
     @FXML
     protected void handlePlayer1Click(ActionEvent event) {
