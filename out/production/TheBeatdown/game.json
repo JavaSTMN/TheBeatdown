@@ -114,7 +114,7 @@
         {
             "id": "SP4",
             "name": "Certified artist",
-            "description": "Heal 2 HP of the target.",
+            "description": "Heal 5 HP of the target.",
             "portrait": "certif.jpg",
             "cost": 3,
             "action": "HEAL",

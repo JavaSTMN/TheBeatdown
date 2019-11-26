@@ -95,6 +95,8 @@ public class GameController implements Initializable {
 
     private ISpell spellToCast;
 
+    private Player spellToCastCaster;
+
     private Minion minionWaitingToAttack;
 
     /**
@@ -141,9 +143,14 @@ public class GameController implements Initializable {
                 this.getMinionWaitingToAttack().attack(target);
                 this.getMinionWaitingToAttack().setHasAlreadyAttack(true);
                 this.setMinionWaitingToAttack(null);
+                this.renderEverything();
             }
         }
-        this.renderEverything();
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer1());
+            this.spellToCast = null;
+            renderEverything();
+        }
     }
 
     @FXML
@@ -155,9 +162,14 @@ public class GameController implements Initializable {
                 this.getMinionWaitingToAttack().attack(target);
                 this.getMinionWaitingToAttack().setHasAlreadyAttack(true);
                 this.setMinionWaitingToAttack(null);
+                this.renderEverything();
             }
         }
-        this.renderEverything();
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer2());
+            this.spellToCast = null;
+            renderEverything();
+        }
     }
 
     /**
@@ -243,7 +255,8 @@ public class GameController implements Initializable {
             if (!currentTurnPlayer.getHeroSpell().isTargettedSpell) {
                 is.useSpell(currentTurnPlayer, opponent); // use the right spell
             } else {
-                GameController.getInstance().setSpellToCast(is);
+                this.spellToCast = is;
+                this.spellToCastCaster = caster;
             }
 
             // refresh UI
@@ -402,5 +415,9 @@ public class GameController implements Initializable {
 
     public void setMinionWaitingToAttack(Minion minionWaitingToAttack) {
         this.minionWaitingToAttack = minionWaitingToAttack;
+    }
+
+    public void setSpellToCastCaster(Player spellToCastCaster) {
+        this.spellToCastCaster = spellToCastCaster;
     }
 }

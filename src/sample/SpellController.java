@@ -53,6 +53,7 @@ public class SpellController {
                 is.useSpell(currentTurnPlayer, otherPlayer); // use the right spell
             } else {
                 GameController.getInstance().setSpellToCast(is);
+                GameController.getInstance().setSpellToCastCaster(this.owner);
             }
 
             // refresh UI
