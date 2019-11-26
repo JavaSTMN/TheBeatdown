@@ -95,6 +95,8 @@ public class GameController implements Initializable {
 
     private ISpell spellToCast;
 
+    private Player spellToCastCaster;
+
     private Minion minionWaitingToAttack;
 
     /**
@@ -134,12 +136,20 @@ public class GameController implements Initializable {
     /** HEROES **/
     @FXML
     protected void handlePlayer1Click(ActionEvent event) {
-        System.out.println("clickedPlayer1");
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer1());
+            this.spellToCast = null;
+            renderEverything();
+        }
     }
 
     @FXML
     protected void handlePlayer2Click(ActionEvent event) {
-        System.out.println("clickedPlayer2");
+        if (this.spellToCast != null) {
+            this.spellToCast.useSpell(spellToCastCaster, GameManager.getInstance().getPlayer2());
+            this.spellToCast = null;
+            renderEverything();
+        }
     }
 
     /**
@@ -225,7 +235,8 @@ public class GameController implements Initializable {
             if (!currentTurnPlayer.getHeroSpell().isTargettedSpell) {
                 is.useSpell(currentTurnPlayer, opponent); // use the right spell
             } else {
-                GameController.getInstance().setSpellToCast(is);
+                this.spellToCast = is;
+                this.spellToCastCaster = caster;
             }
 
             // refresh UI
@@ -384,5 +395,9 @@ public class GameController implements Initializable {
 
     public void setMinionWaitingToAttack(Minion minionWaitingToAttack) {
         this.minionWaitingToAttack = minionWaitingToAttack;
+    }
+
+    public void setSpellToCastCaster(Player spellToCastCaster) {
+        this.spellToCastCaster = spellToCastCaster;
     }
 }
