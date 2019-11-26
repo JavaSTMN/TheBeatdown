@@ -14,7 +14,7 @@ public class Minion extends Card {
         this.dmg = dmg;
         this.currentHP = maxHP;
         this.maxHP = maxHP;
-        this.hasAlreadyAttack = false;
+        this.hasAlreadyAttack = true;
     }
 
     public Minion() {
@@ -26,7 +26,7 @@ public class Minion extends Card {
         this.dmg = minion.getDmg();
         this.currentHP = minion.getMaxHP();
         this.maxHP = minion.getMaxHP();
-        this.hasAlreadyAttack = false;
+        this.hasAlreadyAttack = true;
     }
 
     public int getDmg() {
