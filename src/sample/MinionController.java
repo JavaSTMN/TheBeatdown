@@ -47,12 +47,21 @@ public class MinionController {
             playableCardEffect = this.minionCardBtn.getEffect();
         }
 
-        // if minion on board and can't attack, disable the UI component
-        if (GameManager.getInstance().getPlayer1().getBoard().contains(m) || GameManager.getInstance().getPlayer2().getBoard().contains(m)) {
-            if (m.hasAlreadyAttacked() || GameManager.getInstance().getCurrentTurnPlayer() != this.owner) {
-                this.minionCardBtn.setEffect(null);
-            } else {
-                this.minionCardBtn.setEffect(playableCardEffect);
+        // only display effects for current turn player
+        if (this.owner == GameManager.getInstance().getCurrentTurnPlayer()) {
+            // if minion on board
+            if (this.owner.getBoard().contains(m)) {
+                if (m.hasAlreadyAttacked() || GameManager.getInstance().getCurrentTurnPlayer() != this.owner) {
+                    this.minionCardBtn.setEffect(null);
+                } else {
+                    this.minionCardBtn.setEffect(playableCardEffect);
+                } // else if minion in hand hand
+            } else if (this.owner.getHand().getCards().contains(m)) {
+                if (this.owner.getManaReserve().hasEnoughMana(m.getCost())) {
+                    this.minionCardBtn.setEffect(playableCardEffect);
+                } else {
+                    this.minionCardBtn.setEffect(null);
+                }
             }
         } else {
             this.minionCardBtn.setEffect(null);
