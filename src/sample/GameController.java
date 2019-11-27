@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -107,6 +108,8 @@ public class GameController implements Initializable {
     private Player spellToCastCaster;
 
     private Minion minionWaitingToAttack;
+
+    private Effect playableHeroSpellEffect;
 
     /**
      * Inits the game visuals
@@ -264,6 +267,29 @@ public class GameController implements Initializable {
         }
         this.player1HeroSpellManaCost.setText(Integer.toString(p1HeroSpell.getCost()));
         this.player2HeroSpellManaCost.setText(Integer.toString(p2HeroSpell.getCost()));
+
+        // store effect for later
+        if(player1HeroSpellBtn.getEffect() != null) {
+            playableHeroSpellEffect = player1HeroSpellBtn.getEffect();
+        }
+
+        // store effect to reuse it later
+        Button spellCardBtn;
+        if (GameManager.getInstance().getCurrentTurnPlayer() == GameManager.getInstance().getPlayer1()) {
+            if (GameManager.getInstance().getPlayer1().getManaReserve().hasEnoughMana(GameManager.getInstance().getPlayer1().getHeroSpell().getCost())) {
+                player1HeroSpellBtn.setEffect(playableHeroSpellEffect);
+            } else {
+                player1HeroSpellBtn.setEffect(null);
+            }
+            player2HeroSpellBtn.setEffect(null);
+        } else {
+            if (GameManager.getInstance().getPlayer2().getManaReserve().hasEnoughMana(GameManager.getInstance().getPlayer2().getHeroSpell().getCost())) {
+                player2HeroSpellBtn.setEffect(playableHeroSpellEffect);
+            } else {
+                player2HeroSpellBtn.setEffect(null);
+            }
+            player1HeroSpellBtn.setEffect(null);
+        }
     }
 
     @FXML
