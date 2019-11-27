@@ -26,6 +26,5 @@ public class SpellPickCard extends Spell implements ISpell {
                 caster.triggerHPLossPerTurn();
             }
         }
-        super.useSpell(caster, receiver);
     }
 }
